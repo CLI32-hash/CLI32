@@ -237,15 +237,12 @@ export const About = () => {
             <div className="absolute -inset-3 sm:-inset-4 bg-gradient-to-tr from-blue-600/15 via-sky-400/15 to-indigo-500/10 rounded-[28px] sm:rounded-[32px] blur-2xl pointer-events-none" />
 
             {/* Container with ~20-24px border radius */}
-            <div className="relative rounded-[22px] sm:rounded-[24px] overflow-hidden border border-slate-200/80 bg-slate-900 shadow-xl group animate-hero-img">
+            <div className="relative rounded-[22px] sm:rounded-[24px] overflow-hidden border border-slate-200/80 bg-white shadow-xl animate-hero-img">
               <img
                 src={aboutHeroImg}
                 alt="Real World Integration - Bridging Education and Industry"
-                className="w-full h-[320px] sm:h-[400px] lg:h-[440px] object-cover transition-transform duration-700 group-hover:scale-[1.02]"
+                className="w-full h-auto object-contain block"
               />
-
-              {/* Subtle top/bottom gradient overlay for contrast */}
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-black/10 pointer-events-none" />
 
               {/* Small Floating Badge (Minimal, Premium, Vertical gentle float) */}
               <div className="absolute bottom-5 left-5 right-5 sm:right-auto sm:max-w-xs bg-white/95 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 sm:p-4 shadow-xl flex items-center gap-3.5 animate-float-badge z-20">

@@ -217,3 +217,18 @@ input, select, textarea {
   outline: none;
   font-family: inherit;
 }
+
+/* 7. Scrollbar-hide utility for horizontal scroll containers */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* 8. Slide-in animation for mobile nav drawer */
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
