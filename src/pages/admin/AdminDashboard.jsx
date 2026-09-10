@@ -282,7 +282,7 @@ export const AdminDashboard = () => {
         {activeTab === 'services' && (
           <div className="p-6 space-y-4">
             <div className="text-xs text-slate-500">
-              Standardized engagement services supported across the Faculty of Practice platform.
+              Standardized engagement services supported across the Real World Integration platform.
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {availableServiceCategories.map((svc) => (

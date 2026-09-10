@@ -21,13 +21,12 @@ export const Navbar = () => {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <Link to="/" className="flex items-center gap-2">
-              <div className="bg-brand-600 text-white p-1.5 rounded-lg">
-                <BookOpen className="w-6 h-6" />
+            <Link to="/" className="flex items-center gap-3">
+              <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-[#0c1938] text-white shadow-sm flex items-center justify-center shrink-0">
+                <BookOpen className="w-5.5 h-5.5 sm:w-6 sm:h-6 text-white stroke-[2.2]" />
               </div>
-              <span className="font-bold text-xl tracking-tight text-slate-800">
-                Real World
-                <span className="text-brand-600"> Integration</span>
+              <span className="font-extrabold text-xl sm:text-2xl tracking-tight text-[#0c1938]">
+                Real World <span className="text-[#1D58D8]">Integration</span>
               </span>
             </Link>
             <div className="hidden md:ml-8 md:flex md:space-x-6 text-sm font-medium text-slate-600">

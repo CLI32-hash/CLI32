@@ -7,12 +7,16 @@ export const Footer = () => {
     <footer className="bg-slate-900 text-slate-300 pt-12 pb-8 border-t border-slate-800">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 grid grid-cols-1 md:grid-cols-4 gap-8">
         <div className="space-y-3">
-          <div className="flex items-center gap-2 text-white font-bold text-lg">
-            <BookOpen className="w-5 h-5 text-brand-500" />
-            Faculty of Practice
+          <div className="flex items-center gap-2.5 text-white font-bold text-lg">
+            <div className="bg-[#0f172a] border border-slate-700 text-white p-1.5 rounded-lg shadow-sm flex items-center justify-center">
+              <BookOpen className="w-5 h-5 text-white" />
+            </div>
+            <span>
+              Real World <span className="text-blue-400">Integration</span>
+            </span>
           </div>
           <p className="text-xs text-slate-400 leading-relaxed">
-            Faculty of Practice connects colleges, universities and training institutes with professionals, consultants, freelancers and industry experts for guest lectures, workshops, mentorship, consultancy and practical learning opportunities.
+            Real World Integration connects colleges, universities and training institutes with professionals, consultants, freelancers and industry experts for guest lectures, workshops, mentorship, consultancy and practical learning opportunities.
           </p>
         </div>
         <div>
@@ -37,12 +41,12 @@ export const Footer = () => {
         <div>
           <div className="text-white font-semibold mb-3 text-sm">Contact</div>
           <p className="text-xs text-slate-400 mb-2 leading-relaxed">Have questions about institutional onboarding?</p>
-          <p className="text-xs text-white font-mono">contact@facultyofpractice.org</p>
+          <p className="text-xs text-white font-mono">contact@realworldintegration.org</p>
         </div>
       </div>
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 mt-8 pt-6 border-t border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-slate-500">
         <div>
-          © {new Date().getFullYear()} Faculty of Practice. All rights reserved.
+          © {new Date().getFullYear()} Real World Integration. All rights reserved.
         </div>
         <div className="flex gap-4">
           <Link to="/privacy-policy" className="hover:text-slate-300">Privacy Policy</Link>

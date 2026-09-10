@@ -103,7 +103,7 @@ export const HowItWorks = () => {
           Platform Workflow
         </div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-          How Faculty of Practice Works
+          How Real World Integration Works
         </h1>
         <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
           A structured, four-step pathway connecting higher education classrooms with real-world industry expertise.

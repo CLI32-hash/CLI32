@@ -105,23 +105,16 @@ export const RegisterExpert = () => {
         <div className="absolute top-1/3 right-20 w-1.5 h-1.5 bg-white/10 rounded-full" />
         <div className="absolute bottom-1/4 right-6 w-1 h-1 bg-white/15 rounded-full" />
 
-        {/* Logo + Back */}
+        {/* Logo */}
         <div className="relative z-10 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5">
-            <div className="bg-white/10 backdrop-blur-sm text-white p-2 rounded-xl border border-white/15">
-              <BookOpen className="w-6 h-6" />
+            <div className="bg-[#0f172a] text-white p-2 rounded-xl border border-white/20 shadow-sm flex items-center justify-center">
+              <BookOpen className="w-6 h-6 text-white" />
             </div>
             <span className="font-bold text-xl tracking-tight text-white">
               Real World <span className="text-blue-400">Integration</span>
             </span>
           </Link>
-          <button
-            type="button"
-            onClick={handleBack}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/8 hover:bg-white/15 text-white text-xs font-semibold border border-white/10 transition-colors cursor-pointer"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" /> Back
-          </button>
         </div>
 
         {/* Hero copy */}
@@ -178,7 +171,17 @@ export const RegisterExpert = () => {
       {/* ════════════════════════════════════════
           RIGHT PANEL — Form
           ════════════════════════════════════════ */}
-      <div className="flex-1 flex flex-col min-h-screen">
+      <div className="flex-1 flex flex-col min-h-screen relative">
+        {/* Back Button (Top Right of page, not in nav bar) */}
+        <div className="absolute top-4 right-5 sm:top-6 sm:right-8 z-20">
+          <button
+            type="button"
+            onClick={handleBack}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-100/90 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-semibold border border-slate-200/60 transition-colors cursor-pointer"
+          >
+            <ArrowLeft className="w-4 h-4 text-slate-600" /> Back
+          </button>
+        </div>
 
 
 

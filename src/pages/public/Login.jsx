@@ -43,7 +43,7 @@ export const Login = () => {
     } else if (selectedRole === 'INSTITUTION') {
       setEmail('dean@apextech.edu');
     } else {
-      setEmail('admin@facultyofpractice.org');
+      setEmail('admin@realworldintegration.org');
     }
   };
 
@@ -70,20 +70,13 @@ export const Login = () => {
         {/* Logo */}
         <div className="relative z-10 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2.5">
-            <div className="bg-white/15 backdrop-blur-sm text-white p-2 rounded-xl border border-white/20">
-              <BookOpen className="w-6 h-6" />
+            <div className="bg-[#0f172a] text-white p-2 rounded-xl border border-white/20 shadow-sm flex items-center justify-center">
+              <BookOpen className="w-6 h-6 text-white" />
             </div>
             <span className="font-bold text-xl tracking-tight text-white">
-              Faculty of <span className="text-blue-200">Practice</span>
+              Real World <span className="text-blue-200">Integration</span>
             </span>
           </Link>
-          <button
-            type="button"
-            onClick={handleBack}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-semibold backdrop-blur-sm border border-white/15 transition-colors cursor-pointer"
-          >
-            <ArrowLeft className="w-3.5 h-3.5" /> Back
-          </button>
         </div>
 
         {/* Welcome Copy */}
@@ -149,17 +142,16 @@ export const Login = () => {
       {/* ================================================================ */}
       {/* RIGHT PANEL — Login Form                                          */}
       {/* ================================================================ */}
-      <div className="flex-1 flex flex-col min-h-screen">
-        {/* Mobile Header (logo only, no back button) */}
-        <div className="lg:hidden px-5 pt-6 pb-2 flex items-center justify-end border-b border-slate-100">
-          <Link to="/" className="flex items-center gap-2">
-            <div className="bg-[#1D58D8] text-white p-1.5 rounded-lg">
-              <BookOpen className="w-4 h-4" />
-            </div>
-            <span className="font-bold text-sm sm:text-base tracking-tight text-slate-800">
-              Faculty of <span className="text-[#1D58D8]">Practice</span>
-            </span>
-          </Link>
+      <div className="flex-1 flex flex-col min-h-screen relative">
+        {/* Back Button (Top Right of Login page, not in nav bar) */}
+        <div className="absolute top-4 right-5 sm:top-6 sm:right-8 z-20">
+          <button
+            type="button"
+            onClick={handleBack}
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-slate-100/90 hover:bg-slate-200 text-slate-700 text-xs sm:text-sm font-semibold border border-slate-200/60 transition-colors cursor-pointer"
+          >
+            <ArrowLeft className="w-4 h-4 text-slate-600" /> Back
+          </button>
         </div>
 
 
@@ -319,7 +311,7 @@ export const Login = () => {
 
             {/* Create Account Link — destination matches selected role */}
             <div className="text-center text-sm text-slate-500 pt-1">
-              New to Faculty of Practice?{' '}
+              New to Real World Integration?{' '}
               <Link
                 to={role === 'EXPERT' ? '/register/expert' : '/register/institution'}
                 className="font-bold text-[#1D58D8] hover:text-[#1546B8] hover:underline transition-colors"

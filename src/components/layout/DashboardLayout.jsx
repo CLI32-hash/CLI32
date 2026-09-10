@@ -96,12 +96,12 @@ export const DashboardLayout = ({ role }) => {
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
-            <Link to="/" className="flex items-center gap-1.5">
-              <div className="w-7 h-7 rounded-lg bg-[#0f172a] flex items-center justify-center">
-                <BookOpen className="w-3.5 h-3.5 text-white" />
+            <Link to="/" className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-xl bg-[#0c1938] flex items-center justify-center shadow-sm shrink-0">
+                <BookOpen className="w-4 h-4 text-white stroke-[2.2]" />
               </div>
-              <span className="font-bold text-[14px] tracking-tight text-slate-800">
-                Real World<span className="text-blue-600"> Integration</span>
+              <span className="font-extrabold text-[15px] tracking-tight text-[#0c1938]">
+                Real World <span className="text-[#1D58D8]">Integration</span>
               </span>
             </Link>
           </div>
@@ -136,11 +136,11 @@ export const DashboardLayout = ({ role }) => {
             {/* Drawer Header */}
             <div className="flex items-center justify-between px-4 py-4 border-b border-slate-100">
               <Link to="/" className="flex items-center gap-2" onClick={() => setMobileMenuOpen(false)}>
-                <div className="w-8 h-8 rounded-lg bg-[#0f172a] flex items-center justify-center">
-                  <BookOpen className="w-4 h-4 text-white" />
+                <div className="w-8 h-8 rounded-xl bg-[#0c1938] flex items-center justify-center shadow-sm shrink-0">
+                  <BookOpen className="w-4 h-4 text-white stroke-[2.2]" />
                 </div>
-                <span className="font-bold text-[15px] tracking-tight text-slate-800">
-                  Real World<span className="text-blue-600"> Integration</span>
+                <span className="font-extrabold text-[15px] tracking-tight text-[#0c1938]">
+                  Real World <span className="text-[#1D58D8]">Integration</span>
                 </span>
               </Link>
               <button
@@ -221,14 +221,11 @@ export const DashboardLayout = ({ role }) => {
           {/* Real World Integration Logo */}
           <div className="px-5 py-5 border-b border-slate-100">
             <Link to="/" className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-lg bg-[#0f172a] flex items-center justify-center shadow-sm">
-                <BookOpen className="w-4.5 h-4.5 text-white" />
+              <div className="w-9 h-9 rounded-xl bg-[#0c1938] flex items-center justify-center shadow-sm shrink-0">
+                <BookOpen className="w-4.5 h-4.5 text-white stroke-[2.2]" />
               </div>
-              <div>
-                <div className="text-[13px] font-bold text-slate-900 leading-tight">
-                  Real World
-                  <span className="text-blue-600"> Integration</span>
-                </div>
+              <div className="font-extrabold text-[15px] tracking-tight text-[#0c1938] leading-tight">
+                Real World <span className="text-[#1D58D8]">Integration</span>
               </div>
             </Link>
           </div>

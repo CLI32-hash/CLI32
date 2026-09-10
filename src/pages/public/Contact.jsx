@@ -34,7 +34,7 @@ export const Contact = () => {
             <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Email Address</div>
             <div className="text-xs sm:text-sm font-semibold text-slate-800 flex items-center gap-1.5">
               <Mail className="w-3.5 h-3.5 text-slate-400" />
-              support@facultyofpractice.org
+              support@realworldintegration.org
             </div>
           </div>
           <div className="space-y-1">

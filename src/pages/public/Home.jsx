@@ -687,7 +687,7 @@ export const Home = () => {
       </section>
 
       {/* ========================================================================= */}
-      {/* 6. WHY FACULTY OF PRACTICE */}
+      {/* 6. WHY REAL WORLD INTEGRATION */}
       {/* ========================================================================= */}
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-10">
         <div className="text-center space-y-2 max-w-2xl mx-auto">
@@ -715,7 +715,7 @@ export const Home = () => {
               <ArrowRight className="w-6 h-6 text-[#1D58D8]" />
             </div>
 
-            {/* Step 2: Faculty of Practice */}
+            {/* Step 2: Real World Integration */}
             <div className="flex flex-col items-center text-center p-4 sm:p-5 bg-[#0F172A] text-white rounded-xl sm:rounded-2xl w-full md:w-60 shadow-md">
               <div className="w-12 h-12 rounded-2xl bg-white/10 text-white flex items-center justify-center font-bold mb-2">
                 <Layers className="w-6 h-6" />
