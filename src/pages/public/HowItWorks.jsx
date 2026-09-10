@@ -130,24 +130,21 @@ export const HowItWorks = () => {
             </div>
 
             {/* Stepper List */}
-            <div className="relative pl-6 space-y-8 before:absolute before:left-3 before:top-2 before:bottom-2 before:w-[2px] before:bg-slate-100">
+            <div className="relative pl-10 sm:pl-12 space-y-8 before:absolute before:left-3.5 sm:before:left-4 before:top-3 before:bottom-3 before:w-[2px] before:bg-slate-100">
               {expertSteps.map((item) => {
-                const Icon = item.icon;
                 return (
                   <div key={item.step} className="relative group">
-                    {/* Node Dot */}
-                    <div className="absolute -left-6 top-0.5 w-6 h-6 rounded-full bg-white border-2 border-slate-300 group-hover:border-blue-600 group-hover:bg-blue-50 flex items-center justify-center transition-colors">
-                      <span className="text-[10px] font-bold text-slate-600 group-hover:text-blue-600">
+                    {/* Node Dot Badge */}
+                    <div className="absolute -left-10 sm:-left-12 top-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white border-2 border-slate-200 group-hover:border-blue-600 group-hover:bg-blue-50 shadow-2xs flex items-center justify-center transition-all">
+                      <span className="text-[10px] sm:text-[11px] font-extrabold text-slate-600 group-hover:text-blue-600">
                         {item.step}
                       </span>
                     </div>
 
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <h3 className="text-sm font-bold text-slate-800 group-hover:text-blue-600 transition-colors">
-                          {item.title}
-                        </h3>
-                      </div>
+                    <div className="space-y-1 pt-0.5">
+                      <h3 className="text-sm sm:text-base font-extrabold text-slate-800 group-hover:text-blue-600 transition-colors">
+                        {item.title}
+                      </h3>
                       <p className="text-xs text-slate-500 leading-relaxed">
                         {item.desc}
                       </p>
@@ -186,24 +183,21 @@ export const HowItWorks = () => {
             </div>
 
             {/* Stepper List */}
-            <div className="relative pl-6 space-y-8 before:absolute before:left-3 before:top-2 before:bottom-2 before:w-[2px] before:bg-slate-100">
+            <div className="relative pl-10 sm:pl-12 space-y-8 before:absolute before:left-3.5 sm:before:left-4 before:top-3 before:bottom-3 before:w-[2px] before:bg-slate-100">
               {institutionSteps.map((item) => {
-                const Icon = item.icon;
                 return (
                   <div key={item.step} className="relative group">
-                    {/* Node Dot */}
-                    <div className="absolute -left-6 top-0.5 w-6 h-6 rounded-full bg-white border-2 border-slate-300 group-hover:border-emerald-600 group-hover:bg-emerald-50 flex items-center justify-center transition-colors">
-                      <span className="text-[10px] font-bold text-slate-600 group-hover:text-emerald-600">
+                    {/* Node Dot Badge */}
+                    <div className="absolute -left-10 sm:-left-12 top-0 w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-white border-2 border-slate-200 group-hover:border-emerald-600 group-hover:bg-emerald-50 shadow-2xs flex items-center justify-center transition-all">
+                      <span className="text-[10px] sm:text-[11px] font-extrabold text-slate-600 group-hover:text-emerald-600">
                         {item.step}
                       </span>
                     </div>
 
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <h3 className="text-sm font-bold text-slate-800 group-hover:text-emerald-600 transition-colors">
-                          {item.title}
-                        </h3>
-                      </div>
+                    <div className="space-y-1 pt-0.5">
+                      <h3 className="text-sm sm:text-base font-extrabold text-slate-800 group-hover:text-emerald-600 transition-colors">
+                        {item.title}
+                      </h3>
                       <p className="text-xs text-slate-500 leading-relaxed">
                         {item.desc}
                       </p>

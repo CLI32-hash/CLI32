@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import heroMain from '../../assets/hero-main.png';
@@ -30,9 +30,24 @@ import {
   ArrowDown
 } from 'lucide-react';
 
+const ALIGN_PHRASES = [
+  'Into Education',
+  'Into Classrooms',
+  'Into Campuses',
+  'Into Future Careers'
+];
+
 export const Home = () => {
   const { experts } = useApp();
   const featuredExperts = experts?.slice(0, 4) || [];
+  const [phraseIndex, setPhraseIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setPhraseIndex((prev) => (prev + 1) % ALIGN_PHRASES.length);
+    }, 3200);
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div className="space-y-10 sm:space-y-20 lg:space-y-24 pb-12 sm:pb-20 animate-fade">
@@ -40,19 +55,26 @@ export const Home = () => {
       {/* 1. HERO SECTION */}
       {/* ========================================================================= */}
       <section className="relative bg-white pt-6 sm:pt-14 pb-10 sm:pb-20 lg:pb-24 overflow-hidden border-b border-slate-100">
+        {/* Ambient Glowing Background Spheres */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-300/20 rounded-full blur-3xl animate-pulse-soft -z-0 pointer-events-none" />
+        <div className="absolute top-20 right-10 w-96 h-96 bg-indigo-200/20 rounded-full blur-3xl animate-pulse-soft -z-0 pointer-events-none" />
+
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
           {/* Left Content */}
-          <div className="lg:col-span-6 space-y-6 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#1D58D8] text-[10px] sm:text-[11px] font-bold tracking-wider uppercase">
+          <div className="lg:col-span-6 space-y-6 text-left animate-slide-up-smooth">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#1D58D8] text-[10px] sm:text-[11px] font-bold tracking-wider uppercase shadow-2xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#1D58D8]" />
               INDUSTRY &times; ACADEMIA
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight leading-[1.12] text-[#0F172A]">
+            <h1 className="text-4xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight leading-[1.12] text-[#0F172A] min-h-[120px] sm:min-h-[135px]">
               Bringing Industry Expertise <br />
-              <span className="text-[#1D58D8]">Into Education</span>
+              <span key={phraseIndex} className="inline-block text-[#1D58D8] animate-align-text">
+                {ALIGN_PHRASES[phraseIndex]}
+              </span>
             </h1>
 
-            {/* Thumbnail + Browse text like the reference design */}
+            {/* Thumbnail + Browse text */}
             <div className="flex items-center gap-3 sm:gap-4 py-1">
               <img
                 src={heroThumb}
@@ -72,26 +94,30 @@ export const Home = () => {
             <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 pt-2">
               <Link
                 to="/register/institution"
-                className="px-5 sm:px-7 py-3 sm:py-3.5 bg-[#1D58D8] hover:bg-[#1546B8] text-white rounded-full text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-sm transition-transform active:scale-[0.98] cursor-pointer"
+                className="px-5 sm:px-7 py-3 sm:py-3.5 bg-[#1D58D8] hover:bg-[#1546B8] text-white rounded-full text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-[0.98] cursor-pointer"
               >
                 Join as an Institution <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 to="/register/expert"
-                className="px-5 sm:px-7 py-3 sm:py-3.5 bg-white border border-slate-300 text-slate-800 hover:bg-slate-50 rounded-full text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-xs transition-transform active:scale-[0.98] cursor-pointer"
+                className="px-5 sm:px-7 py-3 sm:py-3.5 bg-white border border-slate-300 text-slate-800 hover:bg-slate-50 rounded-full text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-xs transition-all active:scale-[0.98] cursor-pointer"
               >
                 Join as an Industry Expert
               </Link>
             </div>
 
-            {/* Verified & Security Badges (from reference screenshot) */}
+            {/* Verified & Security Badges with Live Pulse */}
             <div className="flex items-center gap-2.5 sm:gap-3 pt-1 text-[11px] sm:text-xs font-semibold text-slate-700">
-              <div className="flex items-center gap-1 sm:gap-1.5 text-slate-700">
+              <div className="flex items-center gap-1.5 text-slate-700">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                </span>
                 <ShieldCheck className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00BBA7]" />
                 <span>Verified Professionals</span>
               </div>
               <span className="text-slate-300">|</span>
-              <div className="flex items-center gap-1 sm:gap-1.5 text-slate-700">
+              <div className="flex items-center gap-1.5 text-slate-700">
                 <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#00BBA7]" />
                 <span>Secure &amp; Compliant</span>
               </div>
@@ -103,13 +129,47 @@ export const Home = () => {
             </p>
           </div>
 
-          {/* Right Hero Image: Original illustration */}
-          <div className="lg:col-span-6 flex justify-center lg:justify-end items-end relative">
+          {/* Right Hero Image: Original illustration with Floating Glassmorphic Badges */}
+          <div className="lg:col-span-6 flex justify-center lg:justify-end items-end relative animate-hero-img">
+            
+            {/* Floating Badge 1: Guest Lectures (Top Left) */}
+            <div className="hidden sm:flex absolute top-4 left-0 lg:-left-4 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-2xl shadow-xl border border-white/80 items-center gap-2.5 animate-float-badge z-20">
+              <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#1D58D8] flex items-center justify-center font-bold shrink-0">
+                <Presentation className="w-4 h-4" />
+              </div>
+              <div>
+                <div className="text-xs font-extrabold text-slate-900 leading-tight">Guest Lectures</div>
+                <div className="text-[10px] font-medium text-slate-500">Real-world insights</div>
+              </div>
+            </div>
+
+            {/* Floating Badge 2: Workshops (Middle Right) */}
+            <div className="hidden sm:flex absolute top-1/3 -right-2 lg:-right-4 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-2xl shadow-xl border border-white/80 items-center gap-2.5 animate-float-badge-reverse z-20">
+              <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold shrink-0">
+                <Briefcase className="w-4 h-4" />
+              </div>
+              <div>
+                <div className="text-xs font-extrabold text-slate-900 leading-tight">Workshops</div>
+                <div className="text-[10px] font-medium text-slate-500">Hands-on learning</div>
+              </div>
+            </div>
+
+            {/* Floating Badge 3: Mentorship (Bottom Left) */}
+            <div className="hidden sm:flex absolute bottom-8 left-2 lg:-left-2 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-2xl shadow-xl border border-white/80 items-center gap-2.5 animate-float-badge z-20">
+              <div className="w-8 h-8 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold shrink-0">
+                <GraduationCap className="w-4 h-4" />
+              </div>
+              <div>
+                <div className="text-xs font-extrabold text-slate-900 leading-tight">Mentorship</div>
+                <div className="text-[10px] font-medium text-slate-500">Guidance for growth</div>
+              </div>
+            </div>
+
             <div className="w-full max-w-sm sm:max-w-md lg:max-w-xl">
               <img
                 src={heroMain}
                 alt="Real World Integration - Classroom Engagement"
-                className="w-full h-auto object-contain object-bottom"
+                className="w-full h-auto object-contain object-bottom relative z-10"
               />
             </div>
           </div>

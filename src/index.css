@@ -35,7 +35,15 @@
   }
   @keyframes float-badge {
     0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-5px); }
+    50% { transform: translateY(-7px); }
+  }
+  @keyframes float-badge-reverse {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(7px); }
+  }
+  @keyframes pulse-soft {
+    0%, 100% { opacity: 0.25; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.06); }
   }
   @keyframes hero-img-in {
     from { opacity: 0; transform: scale(0.97); }
@@ -45,16 +53,31 @@
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
   }
+  @keyframes align-text {
+    0% { opacity: 0; transform: translateY(24px) scale(0.96); filter: blur(4px); }
+    15% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    85% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+    100% { opacity: 0; transform: translateY(-24px) scale(0.96); filter: blur(4px); }
+  }
 }
 
 .animate-float-badge {
   animation: float-badge 3.5s ease-in-out infinite;
+}
+.animate-float-badge-reverse {
+  animation: float-badge-reverse 4.2s ease-in-out infinite;
+}
+.animate-pulse-soft {
+  animation: pulse-soft 4.5s ease-in-out infinite;
 }
 .animate-hero-img {
   animation: hero-img-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .animate-slide-up-smooth {
   animation: slide-up-smooth 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.animate-align-text {
+  animation: align-text 3.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
 
 /* Base resets and Google-like minimalist setup */
