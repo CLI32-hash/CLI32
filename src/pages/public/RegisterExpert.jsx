@@ -4,23 +4,45 @@ import { useAuth } from '../../context/AuthContext';
 import { expertService } from '../../services/expertService';
 import { availableServiceCategories } from '../../data/services';
 import {
-  ArrowLeft,
-  User,
-  Mail,
-  Briefcase,
-  Building2,
-  MapPin,
-  Globe,
+  ArrowLeft, ArrowRight, BookOpen, User, Mail, Briefcase,
+  Building2, MapPin, Globe, Layers, ShieldCheck, CheckCircle,
+  Lock, Eye, EyeOff, Star, Award, TrendingUp, ChevronDown,
   Hash,
-  Layers,
-  ArrowRight,
-  ShieldCheck,
-  CheckCircle
 } from 'lucide-react';
+
+const EXP_LEVELS = ['1 year','2 years','3 years','5 years','8 years','10 years','12+ years','15+ years'];
+
+const FEATURES = [
+  {
+    icon: Star,
+    title: 'Reach 200+ Institutions',
+    desc: 'Get discovered by colleges and universities actively looking for your expertise.',
+  },
+  {
+    icon: TrendingUp,
+    title: 'Grow Your Impact',
+    desc: 'Mentor students, deliver guest lectures, and shape curricula in your domain.',
+  },
+  {
+    icon: Award,
+    title: 'Verified Expert Profile',
+    desc: 'Your credentials are reviewed and a verified badge boosts your credibility.',
+  },
+];
+
+const STATS = [
+  { value: '500+', label: 'Industry Experts' },
+  { value: '2000+', label: 'Sessions Done' },
+  { value: '50+', label: 'Domains Covered' },
+];
 
 export const RegisterExpert = () => {
   const navigate = useNavigate();
   const { login } = useAuth();
+  const [step, setStep] = useState(1); // 1 = account, 2 = professional, 3 = services
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -29,324 +51,368 @@ export const RegisterExpert = () => {
     designation: '',
     organization: '',
     industry: 'Information Technology',
-    experience: 5,
+    experience: '5 years',
     location: 'Chennai',
-    expertise: 'Cloud Computing, DevOps',
-    servicesOffered: ['Guest Lecture'],
+    expertise: '',
+    servicesOffered: [],
     about: '',
-    linkedin: ''
+    linkedin: '',
   });
 
-  const handleCheckboxChange = (service) => {
-    setFormData((prev) => {
-      const exists = prev.servicesOffered.includes(service);
-      return {
-        ...prev,
-        servicesOffered: exists
-          ? prev.servicesOffered.filter((s) => s !== service)
-          : [...prev.servicesOffered, service]
-      };
-    });
-  };
+  const set = (k, v) => setFormData(p => ({ ...p, [k]: v }));
+
+  const toggleService = (srv) =>
+    setFormData(p => ({
+      ...p,
+      servicesOffered: p.servicesOffered.includes(srv)
+        ? p.servicesOffered.filter(s => s !== srv)
+        : [...p.servicesOffered, srv],
+    }));
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const newExpert = await expertService.createExpert({
       ...formData,
-      expertise: formData.expertise.split(',').map((s) => s.trim())
+      expertise: formData.expertise.split(',').map(s => s.trim()).filter(Boolean),
+      experience: parseInt(formData.experience) || 5,
     });
     login('EXPERT', formData.email, { id: newExpert.id, name: newExpert.name });
     navigate('/expert/dashboard');
   };
 
   const handleBack = () => {
-    if (window.history.length > 1) {
-      navigate(-1);
-    } else {
-      navigate('/');
-    }
+    if (step > 1) { setStep(s => s - 1); return; }
+    window.history.length > 1 ? navigate(-1) : navigate('/');
   };
 
-  const inputClass =
-    'w-full pl-11 pr-4 py-3 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#1D58D8]/20 focus:border-[#1D58D8] outline-none transition-all bg-white placeholder:text-slate-400';
-  const inputClassNoIcon =
-    'w-full px-4 py-3 text-sm border border-slate-200 rounded-xl focus:ring-2 focus:ring-[#1D58D8]/20 focus:border-[#1D58D8] outline-none transition-all bg-white placeholder:text-slate-400';
-  const labelClass = 'block text-sm font-semibold text-slate-800 mb-1.5';
+  const inputCls = (hasIcon = true) =>
+    `w-full ${hasIcon ? 'pl-11' : 'pl-4'} pr-4 py-3 text-sm border border-slate-200 rounded-xl outline-none transition-all bg-white placeholder:text-slate-400 focus:border-blue-500 focus:ring-3 focus:ring-blue-100`;
+
+  const TOTAL_STEPS = 3;
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-8 sm:py-12 animate-fade">
-      {/* Back Button */}
-      <button
-        type="button"
-        onClick={handleBack}
-        className="flex items-center gap-1.5 text-sm font-semibold text-slate-600 hover:text-[#1D58D8] transition-colors mb-6 group cursor-pointer"
-      >
-        <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-        Back
-      </button>
+    <div className="min-h-screen flex flex-col lg:flex-row bg-[#F8FAFC]">
 
-      <div className="bg-white border border-slate-200/80 rounded-2xl shadow-sm overflow-hidden">
-        {/* Header */}
-        <div className="bg-gradient-to-r from-[#0F172A] to-[#1E293B] px-6 sm:px-8 py-6 text-white">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="w-10 h-10 rounded-xl bg-white/15 flex items-center justify-center">
-              <User className="w-5 h-5" />
+      {/* ════════════════════════════════════════
+          LEFT PANEL — dark branded
+          ════════════════════════════════════════ */}
+      <div className="hidden lg:flex lg:w-[46%] bg-gradient-to-br from-[#0F172A] via-[#1E293B] to-[#0F172A] relative overflow-hidden flex-col justify-between p-10 xl:p-14">
+        {/* Decorative */}
+        <div className="absolute top-0 right-0 w-72 h-72 bg-blue-500/10 rounded-full -translate-y-1/3 translate-x-1/3" />
+        <div className="absolute bottom-0 left-0 w-56 h-56 bg-blue-500/8 rounded-full translate-y-1/3 -translate-x-1/3" />
+        <div className="absolute top-1/2 right-10 w-2 h-2 bg-white/10 rounded-full" />
+        <div className="absolute top-1/3 right-20 w-1.5 h-1.5 bg-white/10 rounded-full" />
+        <div className="absolute bottom-1/4 right-6 w-1 h-1 bg-white/15 rounded-full" />
+
+        {/* Logo + Back */}
+        <div className="relative z-10 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2.5">
+            <div className="bg-white/10 backdrop-blur-sm text-white p-2 rounded-xl border border-white/15">
+              <BookOpen className="w-6 h-6" />
             </div>
-            <div>
-              <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight">Join as an Industry Expert</h1>
-              <p className="text-slate-300/80 text-xs sm:text-sm mt-0.5">Publish your professional credentials to collaborate with colleges</p>
-            </div>
+            <span className="font-bold text-xl tracking-tight text-white">
+              Real World <span className="text-blue-400">Integration</span>
+            </span>
+          </Link>
+          <button
+            type="button"
+            onClick={handleBack}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white/8 hover:bg-white/15 text-white text-xs font-semibold border border-white/10 transition-colors cursor-pointer"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" /> Back
+          </button>
+        </div>
+
+        {/* Hero copy */}
+        <div className="relative z-10 space-y-6">
+          <div>
+            <p className="text-blue-400/80 text-xs font-bold tracking-widest uppercase mb-3">Expert Registration</p>
+            <h1 className="text-4xl xl:text-5xl font-extrabold text-white leading-tight tracking-tight">
+              Share Your<br />
+              <span className="text-blue-400">Expertise.</span>
+            </h1>
+            <p className="text-slate-400 text-sm leading-relaxed max-w-sm mt-4">
+              Join India's fastest-growing academic-industry bridge. Connect with institutions eager to learn from your real-world experience.
+            </p>
+          </div>
+
+          {/* Feature bullets */}
+          <div className="space-y-4">
+            {FEATURES.map(({ icon: Icon, title, desc }) => (
+              <div key={title} className="flex items-start gap-3">
+                <div className="w-9 h-9 rounded-xl bg-white/8 border border-white/10 flex items-center justify-center shrink-0 mt-0.5">
+                  <Icon className="w-4 h-4 text-blue-400" />
+                </div>
+                <div>
+                  <p className="text-white text-sm font-bold leading-snug">{title}</p>
+                  <p className="text-slate-400 text-xs mt-0.5 leading-relaxed">{desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Stats */}
+          <div className="flex gap-6 pt-2">
+            {STATS.map(({ value, label }) => (
+              <div key={label}>
+                <p className="text-white text-xl font-black">{value}</p>
+                <p className="text-slate-500 text-[11px] font-medium mt-0.5">{label}</p>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Form */}
-        <div className="px-6 sm:px-8 py-6 sm:py-8">
-          <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Section: Personal Info */}
-            <div className="space-y-1">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400">Personal Information</h3>
-              <div className="border-b border-slate-100" />
+        {/* Expertise domain tags */}
+        <div className="relative z-10 rounded-2xl border border-white/8 overflow-hidden shadow-xl">
+          <div className="h-36 bg-gradient-to-br from-white/5 to-white/3 flex flex-wrap items-center justify-center gap-2 px-6 py-4">
+            {['AI / ML', 'Cloud', 'Cybersecurity', 'Finance', 'Operations', 'Marketing', 'Research', 'DevOps'].map(tag => (
+              <span key={tag} className="px-3 py-1.5 rounded-full bg-white/10 border border-white/12 text-white text-[11px] font-semibold">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ════════════════════════════════════════
+          RIGHT PANEL — Form
+          ════════════════════════════════════════ */}
+      <div className="flex-1 flex flex-col min-h-screen">
+
+
+
+        <div className="flex-1 overflow-y-auto flex items-start justify-center px-5 py-8 sm:py-12">
+          <div className="w-full max-w-md">
+
+            {/* Header */}
+            <div className="mb-7">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-slate-900/5 border border-slate-900/10 rounded-full mb-4">
+                <User className="w-3.5 h-3.5 text-slate-700" />
+                <span className="text-[11px] font-bold text-slate-700 uppercase tracking-wide">Industry Expert Registration</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">Create your profile</h2>
+              <p className="text-sm text-slate-500 mt-1.5">Get discovered by 200+ institutions looking for your expertise.</p>
             </div>
 
-            {/* Row: Name + Email */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className={labelClass}>Full Name <span className="text-red-400">*</span></label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                    <User className="w-4 h-4 text-slate-400" />
+            {/* Step indicator */}
+            <div className="flex items-center gap-2 mb-7">
+              {Array.from({ length: TOTAL_STEPS }, (_, i) => i + 1).map(s => (
+                <React.Fragment key={s}>
+                  <div className="flex items-center gap-1.5">
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
+                      step > s ? 'bg-emerald-500 text-white' : step === s ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-400'
+                    }`}>
+                      {step > s ? <CheckCircle className="w-4 h-4" /> : s}
+                    </div>
+                    <span className={`text-[10px] font-semibold hidden sm:block whitespace-nowrap ${step >= s ? 'text-slate-700' : 'text-slate-400'}`}>
+                      {s === 1 ? 'Account' : s === 2 ? 'Professional' : 'Services'}
+                    </span>
                   </div>
-                  <input
-                    required
-                    type="text"
-                    placeholder="Your full name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className={inputClass}
-                  />
-                </div>
-              </div>
-              <div>
-                <label className={labelClass}>Email <span className="text-red-400">*</span></label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                    <Mail className="w-4 h-4 text-slate-400" />
-                  </div>
-                  <input
-                    required
-                    type="email"
-                    placeholder="you@company.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className={inputClass}
-                  />
-                </div>
-              </div>
+                  {s < TOTAL_STEPS && <div className={`flex-1 h-0.5 rounded-full transition-all ${step > s ? 'bg-emerald-500' : 'bg-slate-200'}`} />}
+                </React.Fragment>
+              ))}
             </div>
 
-            {/* Section: Professional Info */}
-            <div className="space-y-1 pt-2">
-              <h3 className="text-xs font-bold uppercase tracking-widest text-slate-400">Professional Details</h3>
-              <div className="border-b border-slate-100" />
-            </div>
+            <form onSubmit={handleSubmit} className="space-y-4">
 
-            {/* Row: Designation + Organization */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className={labelClass}>Current Designation <span className="text-red-400">*</span></label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                    <Briefcase className="w-4 h-4 text-slate-400" />
+              {/* ── STEP 1: Account ── */}
+              {step === 1 && (
+                <div className="space-y-4 animate-fade">
+                  <div className="grid grid-cols-1 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wide">Full Name <span className="text-red-500">*</span></label>
+                      <div className="relative">
+                        <User className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                        <input required type="text" value={formData.name} onChange={e => set('name', e.target.value)} className={inputCls()} placeholder="Your full name" />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wide">Email <span className="text-red-500">*</span></label>
+                      <div className="relative">
+                        <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                        <input required type="email" value={formData.email} onChange={e => set('email', e.target.value)} className={inputCls()} placeholder="you@company.com" />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wide">Password <span className="text-red-500">*</span></label>
+                      <div className="relative">
+                        <Lock className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                        <input
+                          required
+                          type={showPassword ? 'text' : 'password'}
+                          value={formData.password}
+                          onChange={e => set('password', e.target.value)}
+                          className={inputCls() + ' pr-11'}
+                          placeholder="Min. 6 characters"
+                          minLength={6}
+                        />
+                        <button type="button" onClick={() => setShowPassword(p => !p)} className="absolute right-3.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer">
+                          {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <input
-                    required
-                    type="text"
-                    placeholder="e.g. Principal Architect"
-                    value={formData.designation}
-                    onChange={(e) => setFormData({ ...formData, designation: e.target.value })}
-                    className={inputClass}
-                  />
-                </div>
-              </div>
-              <div>
-                <label className={labelClass}>Organization <span className="text-red-400">*</span></label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                    <Building2 className="w-4 h-4 text-slate-400" />
-                  </div>
-                  <input
-                    required
-                    type="text"
-                    placeholder="Company / Enterprise name"
-                    value={formData.organization}
-                    onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
-                    className={inputClass}
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Row: Industry + Experience + Location */}
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div>
-                <label className={labelClass}>Industry</label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                    <Layers className="w-4 h-4 text-slate-400" />
-                  </div>
-                  <input
-                    required
-                    type="text"
-                    placeholder="IT, Finance..."
-                    value={formData.industry}
-                    onChange={(e) => setFormData({ ...formData, industry: e.target.value })}
-                    className={inputClass}
-                  />
-                </div>
-              </div>
-              <div>
-                <label className={labelClass}>Experience (Years)</label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                    <Hash className="w-4 h-4 text-slate-400" />
-                  </div>
-                  <input
-                    required
-                    type="number"
-                    min="0"
-                    max="50"
-                    value={formData.experience}
-                    onChange={(e) => setFormData({ ...formData, experience: Number(e.target.value) })}
-                    className={inputClass}
-                  />
-                </div>
-              </div>
-              <div>
-                <label className={labelClass}>Location (City)</label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                    <MapPin className="w-4 h-4 text-slate-400" />
-                  </div>
-                  <input
-                    required
-                    type="text"
-                    placeholder="Chennai"
-                    value={formData.location}
-                    onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                    className={inputClass}
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Expertise */}
-            <div>
-              <label className={labelClass}>Areas of Expertise <span className="text-red-400">*</span></label>
-              <input
-                required
-                type="text"
-                placeholder="e.g. Distributed Systems, Spring Boot, PostgreSQL"
-                value={formData.expertise}
-                onChange={(e) => setFormData({ ...formData, expertise: e.target.value })}
-                className={inputClassNoIcon}
-              />
-              <p className="text-[11px] text-slate-400 mt-1">Separate multiple skills with commas</p>
-            </div>
-
-            {/* Services Offered */}
-            <div>
-              <label className={labelClass}>Services You Can Offer</label>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-1">
-                {availableServiceCategories.map((svc) => (
-                  <label
-                    key={svc}
-                    className={`flex items-center gap-2.5 px-3 py-2.5 rounded-xl border text-sm cursor-pointer transition-all ${
-                      formData.servicesOffered.includes(svc)
-                        ? 'bg-blue-50 border-[#1D58D8] text-[#1D58D8] font-semibold'
-                        : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
-                    }`}
+                  <button
+                    type="button"
+                    onClick={() => { if (!formData.name || !formData.email || !formData.password) return; setStep(2); }}
+                    className="w-full flex items-center justify-center gap-2 py-3.5 bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold shadow-sm transition-all cursor-pointer active:scale-[0.98] mt-2"
+                    style={{ borderRadius: '12px' }}
                   >
+                    Continue <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
+
+              {/* ── STEP 2: Professional ── */}
+              {step === 2 && (
+                <div className="space-y-4 animate-fade">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wide">Current Designation <span className="text-red-500">*</span></label>
+                      <div className="relative">
+                        <Briefcase className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                        <input required type="text" value={formData.designation} onChange={e => set('designation', e.target.value)} className={inputCls()} placeholder="e.g. Principal Architect" />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wide">Organization <span className="text-red-500">*</span></label>
+                      <div className="relative">
+                        <Building2 className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                        <input required type="text" value={formData.organization} onChange={e => set('organization', e.target.value)} className={inputCls()} placeholder="Company name" />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wide">Industry <span className="text-red-500">*</span></label>
+                      <div className="relative">
+                        <Layers className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                        <input required type="text" value={formData.industry} onChange={e => set('industry', e.target.value)} className={inputCls()} placeholder="IT, Finance…" />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wide">Experience</label>
+                      <div className="relative">
+                        <Hash className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none z-10" />
+                        <select value={formData.experience} onChange={e => set('experience', e.target.value)} className={inputCls() + ' pr-8 appearance-none'}>
+                          {EXP_LEVELS.map(o => <option key={o}>{o}</option>)}
+                        </select>
+                        <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wide">Location <span className="text-red-500">*</span></label>
+                      <div className="relative">
+                        <MapPin className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                        <input required type="text" value={formData.location} onChange={e => set('location', e.target.value)} className={inputCls()} placeholder="Chennai" />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wide">LinkedIn URL</label>
+                      <div className="relative">
+                        <Globe className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400 pointer-events-none" />
+                        <input type="url" value={formData.linkedin} onChange={e => set('linkedin', e.target.value)} className={inputCls()} placeholder="https://linkedin.com/in/…" />
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wide">Areas of Expertise <span className="text-red-500">*</span></label>
                     <input
-                      type="checkbox"
-                      checked={formData.servicesOffered.includes(svc)}
-                      onChange={() => handleCheckboxChange(svc)}
-                      className="sr-only"
+                      required type="text" value={formData.expertise} onChange={e => set('expertise', e.target.value)}
+                      className={inputCls(false)}
+                      placeholder="e.g. AI/ML, Python, Cloud Architecture"
                     />
-                    <CheckCircle
-                      className={`w-4 h-4 shrink-0 ${
-                        formData.servicesOffered.includes(svc) ? 'text-[#1D58D8]' : 'text-slate-300'
-                      }`}
+                    <p className="text-[10px] text-slate-400 mt-1">Separate multiple skills with commas</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => { if (!formData.designation || !formData.organization) return; setStep(3); }}
+                    className="w-full flex items-center justify-center gap-2 py-3.5 bg-slate-900 hover:bg-slate-800 text-white text-sm font-bold shadow-sm transition-all cursor-pointer active:scale-[0.98] mt-2"
+                    style={{ borderRadius: '12px' }}
+                  >
+                    Continue <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              )}
+
+              {/* ── STEP 3: Services + Bio ── */}
+              {step === 3 && (
+                <div className="space-y-4 animate-fade">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-2 uppercase tracking-wide">Services You Can Offer</label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {availableServiceCategories.map(svc => {
+                        const active = formData.servicesOffered.includes(svc);
+                        return (
+                          <button
+                            key={svc}
+                            type="button"
+                            onClick={() => toggleService(svc)}
+                            className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-xs font-semibold text-left cursor-pointer transition-all ${
+                              active ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-slate-200 bg-white text-slate-600 hover:border-blue-200 hover:bg-blue-50/30'
+                            }`}
+                          >
+                            <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${active ? 'border-blue-600' : 'border-slate-300'}`}>
+                              {active && <div className="w-2 h-2 rounded-full bg-blue-600" />}
+                            </div>
+                            {svc}
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wide">Professional Bio <span className="text-red-500">*</span></label>
+                    <textarea
+                      required rows={4}
+                      value={formData.about}
+                      onChange={e => set('about', e.target.value)}
+                      className={inputCls(false) + ' resize-none'}
+                      placeholder="A brief summary of your professional background and what value you bring to academic institutions..."
                     />
-                    <span className="text-xs sm:text-sm">{svc}</span>
-                  </label>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="w-full flex items-center justify-center gap-2 py-3.5 bg-slate-900 hover:bg-slate-800 disabled:opacity-60 text-white text-sm font-bold shadow-sm transition-all cursor-pointer active:scale-[0.98]"
+                    style={{ borderRadius: '12px' }}
+                  >
+                    {loading
+                      ? <><div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" /> Creating Profile…</>
+                      : <>Create Expert Profile <ArrowRight className="w-4 h-4" /></>
+                    }
+                  </button>
+                </div>
+              )}
+
+              {/* Login link */}
+              <p className="text-center text-sm text-slate-500 pt-1">
+                Already have an account?{' '}
+                <Link to="/login" className="font-bold text-blue-600 hover:underline">Log in</Link>
+              </p>
+            </form>
+
+            {/* Trust bar */}
+            <div className="mt-8 pt-6 border-t border-slate-100">
+              <div className="flex flex-row flex-wrap items-center justify-center gap-x-4 gap-y-2 text-[11px] text-slate-500">
+                {[
+                  { icon: ShieldCheck, label: 'Secure & Compliant' },
+                  { icon: CheckCircle, label: 'Profile reviewed in 24h' },
+                  { icon: CheckCircle, label: 'Free to register' },
+                ].map(({ icon: Icon, label }) => (
+                  <div key={label} className="flex items-center gap-1.5">
+                    <Icon className="w-3.5 h-3.5 text-emerald-500" />
+                    <span className="font-medium">{label}</span>
+                  </div>
                 ))}
               </div>
             </div>
 
-            {/* Bio */}
-            <div>
-              <label className={labelClass}>Professional Bio <span className="text-red-400">*</span></label>
-              <textarea
-                required
-                rows={3}
-                placeholder="A brief summary of your professional background and what you bring to academia..."
-                value={formData.about}
-                onChange={(e) => setFormData({ ...formData, about: e.target.value })}
-                className={inputClassNoIcon + ' resize-none'}
-              />
-            </div>
-
-            {/* LinkedIn */}
-            <div>
-              <label className={labelClass}>LinkedIn URL</label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
-                  <Globe className="w-4 h-4 text-slate-400" />
-                </div>
-                <input
-                  type="url"
-                  placeholder="https://linkedin.com/in/yourprofile"
-                  value={formData.linkedin}
-                  onChange={(e) => setFormData({ ...formData, linkedin: e.target.value })}
-                  className={inputClass}
-                />
-              </div>
-            </div>
-
-            {/* Divider */}
-            <div className="border-t border-slate-100 pt-1" />
-
-            {/* Submit */}
-            <button
-              type="submit"
-              className="w-full py-3.5 bg-[#0F172A] hover:bg-[#1E293B] text-white text-sm font-bold rounded-xl shadow-sm flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
-            >
-              Join as Industry Expert <ArrowRight className="w-4 h-4" />
-            </button>
-
-            {/* Login Link */}
-            <p className="text-center text-sm text-slate-500">
-              Already have an account?{' '}
-              <Link to="/login" className="font-bold text-[#1D58D8] hover:underline">Login</Link>
+            <p className="text-center text-xs text-slate-400 mt-4">
+              Registering an institution?{' '}
+              <Link to="/register/institution" className="font-bold text-blue-600 hover:underline">Join as Institution →</Link>
             </p>
-          </form>
-        </div>
-
-        {/* Trust Bar */}
-        <div className="border-t border-slate-100 bg-slate-50/50 px-6 sm:px-8 py-4">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-center gap-3 sm:gap-6 text-xs text-slate-500">
-            <div className="flex items-center gap-1.5">
-              <ShieldCheck className="w-4 h-4 text-[#00A86B]" />
-              <span className="font-semibold text-slate-700">Verified Platform</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <CheckCircle className="w-4 h-4 text-[#00A86B]" />
-              <span>Profile reviewed within 24 hours</span>
-            </div>
-            <div className="flex items-center gap-1.5">
-              <CheckCircle className="w-4 h-4 text-[#00A86B]" />
-              <span>Free to register</span>
-            </div>
           </div>
         </div>
       </div>

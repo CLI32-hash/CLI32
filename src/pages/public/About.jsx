@@ -244,8 +244,8 @@ export const About = () => {
                 className="w-full h-auto object-contain block"
               />
 
-              {/* Small Floating Badge (Minimal, Premium, Vertical gentle float) */}
-              <div className="absolute bottom-5 left-5 right-5 sm:right-auto sm:max-w-xs bg-white/95 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 sm:p-4 shadow-xl flex items-center gap-3.5 animate-float-badge z-20">
+              {/* Small Floating Badge — hidden on mobile so image is fully visible */}
+              <div className="hidden sm:flex absolute bottom-5 left-5 right-5 sm:right-auto sm:max-w-xs bg-white/95 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 sm:p-4 shadow-xl items-center gap-3.5 animate-float-badge z-20">
                 <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0 text-[#1D58D8]">
                   <Award className="w-5 h-5" />
                 </div>
@@ -277,8 +277,8 @@ export const About = () => {
                   alt="Connecting Education with Real-World Expertise"
                   className="w-full h-auto object-contain block"
                 />
-                {/* Floating pill badge on the visual */}
-                <div className="absolute bottom-4 left-4 right-4 bg-slate-900/85 backdrop-blur-md border border-white/20 rounded-xl p-3 text-white flex items-center gap-3">
+                {/* Floating pill badge on the visual — hidden on mobile so image is fully visible */}
+                <div className="hidden sm:flex absolute bottom-4 left-4 right-4 bg-slate-900/85 backdrop-blur-md border border-white/20 rounded-xl p-3 text-white items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-400/30 flex items-center justify-center shrink-0">
                     <CheckCircle2 className="w-4 h-4 text-blue-300" />
                   </div>

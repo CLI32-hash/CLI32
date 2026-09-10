@@ -150,15 +150,8 @@ export const Login = () => {
       {/* RIGHT PANEL — Login Form                                          */}
       {/* ================================================================ */}
       <div className="flex-1 flex flex-col min-h-screen">
-        {/* Mobile Header with Back Button (visible only on mobile) */}
-        <div className="lg:hidden px-5 pt-6 pb-2 flex items-center justify-between border-b border-slate-100">
-          <button
-            type="button"
-            onClick={handleBack}
-            className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-600 hover:text-[#1D58D8] py-1 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4" /> Back
-          </button>
+        {/* Mobile Header (logo only, no back button) */}
+        <div className="lg:hidden px-5 pt-6 pb-2 flex items-center justify-end border-b border-slate-100">
           <Link to="/" className="flex items-center gap-2">
             <div className="bg-[#1D58D8] text-white p-1.5 rounded-lg">
               <BookOpen className="w-4 h-4" />
@@ -169,16 +162,7 @@ export const Login = () => {
           </Link>
         </div>
 
-        {/* Desktop Top Bar with Back Button */}
-        <div className="hidden lg:flex items-center justify-start px-8 pt-8 pb-2">
-          <button
-            type="button"
-            onClick={handleBack}
-            className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-slate-500 hover:text-[#1D58D8] transition-colors group cursor-pointer"
-          >
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" /> Back
-          </button>
-        </div>
+
 
         {/* Form Area */}
         <div className="flex-1 flex items-center justify-center px-5 sm:px-8 py-6 lg:py-8">
@@ -333,10 +317,13 @@ export const Login = () => {
               </button>
             </div>
 
-            {/* Create Account Link */}
+            {/* Create Account Link — destination matches selected role */}
             <div className="text-center text-sm text-slate-500 pt-1">
               New to Faculty of Practice?{' '}
-              <Link to="/register/institution" className="font-bold text-[#1D58D8] hover:text-[#1546B8] hover:underline transition-colors">
+              <Link
+                to={role === 'EXPERT' ? '/register/expert' : '/register/institution'}
+                className="font-bold text-[#1D58D8] hover:text-[#1546B8] hover:underline transition-colors"
+              >
                 Create an account
               </Link>
             </div>
