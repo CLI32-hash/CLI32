@@ -52,11 +52,8 @@ export const DashboardLayout = ({ role }) => {
       return [
         { name: 'Dashboard', path: '/institution/dashboard', icon: LayoutDashboard },
         { name: 'Explore Experts', path: '/institution/experts', icon: Search },
+        { name: 'Requirements', path: '/institution/requirements', icon: Briefcase },
         { name: 'My Enquiries', path: '/institution/enquiries', icon: Mail },
-        { name: 'Students', path: '/institution/dashboard', icon: GraduationCap },
-        { name: 'Experts', path: '/institution/experts', icon: Users },
-        { name: 'Sessions', path: '/institution/dashboard', icon: Calendar },
-        { name: 'Reports', path: '/institution/dashboard', icon: BarChart3 },
         { name: 'Settings', path: '/institution/profile', icon: Settings },
       ];
     }
@@ -78,6 +75,8 @@ export const DashboardLayout = ({ role }) => {
     if (linkName === 'My Enquiries' && location.pathname.endsWith('/enquiries')) return true;
     if (linkName === 'My Profile' && location.pathname.endsWith('/profile')) return true;
     if (linkName === 'My Services' && location.pathname.endsWith('/services')) return true;
+    if (linkName === 'Requirements' && location.pathname.endsWith('/requirements')) return true;
+    if (linkName === 'Settings' && location.pathname.endsWith('/profile')) return true;
     return false;
   };
 

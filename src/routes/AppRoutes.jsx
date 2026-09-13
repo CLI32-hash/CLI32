@@ -28,6 +28,7 @@ import { ExpertEnquiries } from '../pages/expert/ExpertEnquiries';
 import { InstitutionDashboard } from '../pages/institution/InstitutionDashboard';
 import { InstitutionProfile } from '../pages/institution/InstitutionProfile';
 import { InstitutionEnquiries } from '../pages/institution/InstitutionEnquiries';
+import { InstitutionRequirements } from '../pages/institution/InstitutionRequirements';
 
 // Admin Dashboard
 import { AdminDashboard } from '../pages/admin/AdminDashboard';
@@ -66,9 +67,9 @@ export const AppRoutes = () => {
         <Route element={<DashboardLayout role="INSTITUTION" />}>
           <Route path="/institution/dashboard" element={<InstitutionDashboard />} />
           <Route path="/institution/experts" element={<ExpertsDirectory />} />
-          <Route path="/institution/profile" element={<InstitutionProfile />} />
-          <Route path="/institution/requirements" element={<Navigate to="/institution/profile" replace />} />
+          <Route path="/institution/requirements" element={<InstitutionRequirements />} />
           <Route path="/institution/enquiries" element={<InstitutionEnquiries />} />
+          <Route path="/institution/profile" element={<InstitutionProfile />} />
         </Route>
       </Route>
 
