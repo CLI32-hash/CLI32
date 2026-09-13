@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
+import { ScrollReveal } from '../../components/common/ScrollReveal';
 import heroMain from '../../assets/hero-main.png';
 import heroThumb from '../../assets/group_profiles.png';
 import {
@@ -62,12 +63,12 @@ export const Home = () => {
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
           {/* Left Content */}
           <div className="lg:col-span-6 space-y-6 text-left animate-slide-up-smooth">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#1D58D8] text-[10px] sm:text-[11px] font-bold tracking-wider uppercase shadow-2xs">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#1D58D8] text-[10px] sm:text-[11px] font-bold tracking-wider uppercase shadow-2xs" style={{ animation: 'stagger-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0ms forwards', opacity: 0 }}>
               <Sparkles className="w-3.5 h-3.5 text-[#1D58D8]" />
               INDUSTRY &times; ACADEMIA
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight leading-[1.12] text-[#0F172A] min-h-[120px] sm:min-h-[135px]">
+            <h1 className="text-4xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight leading-[1.12] text-[#0F172A] min-h-[120px] sm:min-h-[135px]" style={{ animation: 'stagger-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) 80ms forwards', opacity: 0 }}>
               Bringing Industry Expertise <br />
               <span key={phraseIndex} className="inline-block text-[#1D58D8] animate-align-text">
                 {ALIGN_PHRASES[phraseIndex]}
@@ -86,17 +87,17 @@ export const Home = () => {
               </p>
             </div>
 
-            <p className="text-slate-600 text-xs sm:text-sm md:text-base max-w-xl leading-relaxed">
+            <p className="text-slate-600 text-xs sm:text-sm md:text-base max-w-xl leading-relaxed" style={{ animation: 'stagger-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) 200ms forwards', opacity: 0 }}>
               Real World Integration connects colleges, universities and training institutes with professionals who can bring real-world knowledge, practical skills and industry experience into the classroom.
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 pt-2">
+            <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 pt-2" style={{ animation: 'stagger-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) 280ms forwards', opacity: 0 }}>
               <Link
                 to="/register/institution"
-                className="px-5 sm:px-7 py-3 sm:py-3.5 bg-[#1D58D8] hover:bg-[#1546B8] text-white rounded-full text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-[0.98] cursor-pointer"
+                className="btn-arrow-animate px-5 sm:px-7 py-3 sm:py-3.5 bg-[#1D58D8] hover:bg-[#1546B8] text-white rounded-full text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-md hover:shadow-lg transition-all active:scale-[0.98] cursor-pointer"
               >
-                Join as an Institution <ArrowRight className="w-4 h-4" />
+                Join as an Institution <ArrowRight className="w-4 h-4 arrow-icon" />
               </Link>
               <Link
                 to="/register/expert"
@@ -107,7 +108,7 @@ export const Home = () => {
             </div>
 
             {/* Verified & Security Badges with Live Pulse */}
-            <div className="flex items-center gap-2.5 sm:gap-3 pt-1 text-[11px] sm:text-xs font-semibold text-slate-700">
+            <div className="flex items-center gap-2.5 sm:gap-3 pt-1 text-[11px] sm:text-xs font-semibold text-slate-700" style={{ animation: 'stagger-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) 380ms forwards', opacity: 0 }}>
               <div className="flex items-center gap-1.5 text-slate-700">
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -130,7 +131,7 @@ export const Home = () => {
           </div>
 
           {/* Right Hero Image: Original illustration with Floating Glassmorphic Badges */}
-          <div className="lg:col-span-6 flex justify-center lg:justify-end items-end relative animate-hero-img">
+          <div className="lg:col-span-6 flex justify-center lg:justify-end items-end relative" style={{ animation: 'hero-img-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards', opacity: 0 }}>
             
             {/* Floating Badge 1: Guest Lectures (Top Left) */}
             <div className="hidden sm:flex absolute top-4 left-0 lg:-left-4 bg-white/95 backdrop-blur-md px-3.5 py-2.5 rounded-2xl shadow-xl border border-white/80 items-center gap-2.5 animate-float-badge z-20">
@@ -180,6 +181,7 @@ export const Home = () => {
       {/* 2. CORE VALUE SECTION */}
       {/* ========================================================================= */}
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-10">
+        <ScrollReveal>
         <div className="text-center space-y-2 max-w-3xl mx-auto">
           <div className="text-[11px] font-bold uppercase tracking-widest text-[#1D58D8]">
             ONE PLATFORM. TWO COMMUNITIES.
@@ -191,11 +193,13 @@ export const Home = () => {
             Real World Integration gives institutions a simple way to discover professionals and gives industry experts a place to showcase their knowledge, experience and services.
           </p>
         </div>
+        </ScrollReveal>
 
         {/* Two Large Value Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8">
           {/* Card 1: For Institutions */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 shadow-2xs hover:border-slate-300 transition-all flex flex-col justify-between space-y-6 sm:space-y-8">
+          <ScrollReveal delay={0}>
+          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 shadow-2xs hover:border-slate-300 transition-all flex flex-col justify-between space-y-6 sm:space-y-8 card-animate-hover">
             <div className="space-y-6">
               <div className="flex items-center gap-3.5">
                 <div className="w-12 h-12 rounded-2xl bg-blue-50 text-[#1D58D8] flex items-center justify-center font-bold border border-blue-100 shrink-0">
@@ -232,17 +236,19 @@ export const Home = () => {
             </div>
 
             <div className="pt-6 border-t border-slate-100">
-              <Link
+                <Link
                 to="/experts"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#1D58D8] hover:bg-[#1546B8] text-white rounded-full text-xs font-bold transition-all shadow-xs"
+                className="btn-arrow-animate inline-flex items-center gap-2 px-6 py-3 bg-[#1D58D8] hover:bg-[#1546B8] text-white rounded-full text-xs font-bold transition-all shadow-xs"
               >
-                Explore Experts <ArrowRight className="w-4 h-4" />
+                Explore Experts <ArrowRight className="w-4 h-4 arrow-icon" />
               </Link>
             </div>
           </div>
+          </ScrollReveal>
 
           {/* Card 2: For Industry Experts */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 shadow-2xs hover:border-slate-300 transition-all flex flex-col justify-between space-y-6 sm:space-y-8">
+          <ScrollReveal delay={150}>
+          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 shadow-2xs hover:border-slate-300 transition-all flex flex-col justify-between space-y-6 sm:space-y-8 card-animate-hover">
             <div className="space-y-6">
               <div className="flex items-center gap-3.5">
                 <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#059669] flex items-center justify-center font-bold border border-emerald-100 shrink-0">
@@ -281,12 +287,13 @@ export const Home = () => {
             <div className="pt-6 border-t border-slate-100">
               <Link
                 to="/register/expert"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-[#0F172A] hover:bg-slate-850 text-white rounded-full text-xs font-bold transition-all shadow-xs"
+                className="btn-arrow-animate inline-flex items-center gap-2 px-6 py-3 bg-[#0F172A] hover:bg-slate-850 text-white rounded-full text-xs font-bold transition-all shadow-xs"
               >
-                Join as an Expert <ArrowRight className="w-4 h-4" />
+                Join as an Expert <ArrowRight className="w-4 h-4 arrow-icon" />
               </Link>
             </div>
           </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -294,6 +301,7 @@ export const Home = () => {
       {/* 3. HOW IT WORKS */}
       {/* ========================================================================= */}
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-2 sm:py-4">
+        <ScrollReveal>
         <div className="bg-[#F8FAFC]/80 border border-slate-200/80 rounded-2xl sm:rounded-3xl p-5 sm:p-10 lg:p-14 shadow-2xs">
           {/* Header */}
           <div className="text-left space-y-2 mb-8 sm:mb-14">
@@ -475,12 +483,14 @@ export const Home = () => {
             </div>
           </div>
         </div>
+        </ScrollReveal>
       </section>
 
       {/* ========================================================================= */}
       {/* 4. SERVICES SECTION */}
       {/* ========================================================================= */}
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-10">
+        <ScrollReveal>
         <div className="text-center space-y-2 max-w-3xl mx-auto">
           <div className="text-[11px] font-bold uppercase tracking-widest text-[#00A86B]">
             WAYS TO COLLABORATE
@@ -492,11 +502,13 @@ export const Home = () => {
             Institutions can engage professionals in different ways depending on their academic and practical needs.
           </p>
         </div>
+        </ScrollReveal>
 
         {/* 6 Clean Service Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {/* Service 1 */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4">
+          <ScrollReveal delay={0}>
+          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4 card-animate-hover">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-blue-50 text-[#1D58D8] flex items-center justify-center border border-blue-100">
                 <Presentation className="w-6 h-6" />
@@ -507,9 +519,11 @@ export const Home = () => {
               </p>
             </div>
           </div>
+          </ScrollReveal>
 
           {/* Service 2 */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4">
+          <ScrollReveal delay={100}>
+          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4 card-animate-hover">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#059669] flex items-center justify-center border border-emerald-100">
                 <Sparkles className="w-6 h-6" />
@@ -520,9 +534,11 @@ export const Home = () => {
               </p>
             </div>
           </div>
+          </ScrollReveal>
 
           {/* Service 3 */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4">
+          <ScrollReveal delay={200}>
+          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4 card-animate-hover">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-amber-50 text-[#D97706] flex items-center justify-center border border-amber-100">
                 <Compass className="w-6 h-6" />
@@ -533,9 +549,11 @@ export const Home = () => {
               </p>
             </div>
           </div>
+          </ScrollReveal>
 
           {/* Service 4 */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4">
+          <ScrollReveal delay={100}>
+          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4 card-animate-hover">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-[#4F46E5] flex items-center justify-center border border-indigo-100">
                 <FileCode className="w-6 h-6" />
@@ -546,9 +564,11 @@ export const Home = () => {
               </p>
             </div>
           </div>
+          </ScrollReveal>
 
           {/* Service 5 */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4">
+          <ScrollReveal delay={200}>
+          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4 card-animate-hover">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#0D9488] flex items-center justify-center border border-teal-100">
                 <BookOpen className="w-6 h-6" />
@@ -559,9 +579,11 @@ export const Home = () => {
               </p>
             </div>
           </div>
+          </ScrollReveal>
 
           {/* Service 6 */}
-          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4">
+          <ScrollReveal delay={300}>
+          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4 card-animate-hover">
             <div className="space-y-3">
               <div className="w-12 h-12 rounded-2xl bg-rose-50 text-[#E11D48] flex items-center justify-center border border-rose-100">
                 <Briefcase className="w-6 h-6" />
@@ -572,6 +594,7 @@ export const Home = () => {
               </p>
             </div>
           </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -579,6 +602,7 @@ export const Home = () => {
       {/* 5. PLATFORM DISCOVERY SECTION */}
       {/* ========================================================================= */}
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-8">
+        <ScrollReveal>
         <div className="text-center space-y-2 max-w-2xl mx-auto">
           <div className="text-[11px] font-bold uppercase tracking-widest text-[#1D58D8]">
             DISCOVER EXPERTISE
@@ -590,8 +614,10 @@ export const Home = () => {
             Search across expertise, industries, experience and services to discover professionals who can contribute to your institution.
           </p>
         </div>
+        </ScrollReveal>
 
         {/* Large SaaS UI Mockup of Explore Experts Page */}
+        <ScrollReveal direction="scale">
         <div className="bg-slate-950 rounded-2xl sm:rounded-3xl p-2.5 sm:p-6 shadow-2xl border border-slate-800 text-slate-900">
           <div className="flex items-center justify-between pb-2 sm:pb-3 px-2 sm:px-3 border-b border-slate-800">
             <div className="flex items-center gap-1.5 sm:gap-2">
@@ -744,12 +770,14 @@ export const Home = () => {
             </Link>
           </div>
         </div>
+        </ScrollReveal>
       </section>
 
       {/* ========================================================================= */}
       {/* 6. WHY REAL WORLD INTEGRATION */}
       {/* ========================================================================= */}
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-10">
+        <ScrollReveal>
         <div className="text-center space-y-2 max-w-2xl mx-auto">
           <div className="text-[11px] font-bold uppercase tracking-widest text-[#00A86B]">
             WHY IT MATTERS
@@ -758,7 +786,9 @@ export const Home = () => {
             Closer to Industry. Closer to Practice.
           </h2>
         </div>
+        </ScrollReveal>
 
+        <ScrollReveal delay={100}>
         <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-4 sm:p-10 shadow-2xs space-y-8 sm:space-y-10">
           {/* Visual Pipeline Flow */}
           <div className="flex flex-col md:flex-row items-center justify-between gap-3 sm:gap-4 max-w-4xl mx-auto">
@@ -854,12 +884,14 @@ export const Home = () => {
             </div>
           </div>
         </div>
+        </ScrollReveal>
       </section>
 
       {/* ========================================================================= */}
       {/* 7. FEATURED EXPERTS */}
       {/* ========================================================================= */}
       <section className="w-full space-y-8 overflow-hidden">
+        <ScrollReveal>
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
             <div className="text-[11px] font-bold uppercase tracking-widest text-[#00A86B]">
@@ -879,6 +911,7 @@ export const Home = () => {
             Browse All Experts <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
+        </ScrollReveal>
 
         {/* Auto-scrolling horizontal carousel - Full Screen Width */}
         <style>{`
@@ -984,6 +1017,7 @@ export const Home = () => {
       {/* ========================================================================= */}
       {/* 8. FINAL CTA */}
       {/* ========================================================================= */}
+      <ScrollReveal direction="scale">
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12">
         <div className="bg-[#0F172A] text-white rounded-2xl sm:rounded-3xl p-6 sm:p-12 lg:p-16 text-center space-y-5 sm:space-y-6 shadow-xl relative overflow-hidden">
           {/* Subtle background glow */}
@@ -1015,6 +1049,7 @@ export const Home = () => {
           </div>
         </div>
       </section>
+      </ScrollReveal>
     </div>
   );
 };

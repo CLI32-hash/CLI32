@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { expertService } from '../../services/expertService';
@@ -42,6 +42,10 @@ export const RegisterExpert = () => {
   const [step, setStep] = useState(1); // 1 = account, 2 = professional, 3 = services
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [step]);
 
   const [formData, setFormData] = useState({
     name: '',
@@ -92,7 +96,7 @@ export const RegisterExpert = () => {
   const TOTAL_STEPS = 3;
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-[#F8FAFC]">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-[#F8FAFC] animate-fade">
 
       {/* ════════════════════════════════════════
           LEFT PANEL — dark branded
@@ -105,20 +109,8 @@ export const RegisterExpert = () => {
         <div className="absolute top-1/3 right-20 w-1.5 h-1.5 bg-white/10 rounded-full" />
         <div className="absolute bottom-1/4 right-6 w-1 h-1 bg-white/15 rounded-full" />
 
-        {/* Logo */}
-        <div className="relative z-10 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2.5">
-            <div className="bg-[#0f172a] text-white p-2 rounded-xl border border-white/20 shadow-sm flex items-center justify-center">
-              <BookOpen className="w-6 h-6 text-white" />
-            </div>
-            <span className="font-bold text-xl tracking-tight text-white">
-              Real World <span className="text-blue-400">Integration</span>
-            </span>
-          </Link>
-        </div>
-
         {/* Hero copy */}
-        <div className="relative z-10 space-y-6">
+        <div className="relative z-10 space-y-6 pt-4">
           <div>
             <p className="text-blue-400/80 text-xs font-bold tracking-widest uppercase mb-3">Expert Registration</p>
             <h1 className="text-4xl xl:text-5xl font-extrabold text-white leading-tight tracking-tight">

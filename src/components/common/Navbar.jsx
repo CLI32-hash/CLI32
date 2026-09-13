@@ -30,12 +30,12 @@ export const Navbar = () => {
               </span>
             </Link>
             <div className="hidden md:ml-8 md:flex md:space-x-6 text-sm font-medium text-slate-600">
-              <Link to="/" className="hover:text-brand-600 py-2">Home</Link>
-              <Link to="/about" className="hover:text-brand-600 py-2">About</Link>
-              {/* <Link to="/how-it-works" className="hover:text-brand-600 py-2">How It Works</Link> */}
-              <Link to="/services" className="hover:text-brand-600 py-2">Services</Link>
-              <Link to="/experts" className="hover:text-brand-600 py-2">Experts</Link>
-              <Link to="/contact" className="hover:text-brand-600 py-2">Contact</Link>
+              <Link to="/" className="nav-link-animated hover:text-brand-600 py-2">Home</Link>
+              <Link to="/about" className="nav-link-animated hover:text-brand-600 py-2">About</Link>
+              {/* <Link to="/how-it-works" className="nav-link-animated hover:text-brand-600 py-2">How It Works</Link> */}
+              <Link to="/services" className="nav-link-animated hover:text-brand-600 py-2">Services</Link>
+              <Link to="/experts" className="nav-link-animated hover:text-brand-600 py-2">Experts</Link>
+              <Link to="/contact" className="nav-link-animated hover:text-brand-600 py-2">Contact</Link>
             </div>
           </div>
 
@@ -59,18 +59,18 @@ export const Navbar = () => {
               </div>
             ) : (
               <>
-                <Link to="/login" className="px-3 py-2 text-sm font-medium text-slate-700 hover:text-brand-600">
+                <Link to="/login" className="nav-link-animated px-3 py-2 text-sm font-medium text-slate-700 hover:text-brand-600">
                   Login
                 </Link>
                 <Link
                   to="/register/institution"
-                  className="px-3.5 py-2 text-sm font-medium text-brand-600 border border-brand-600 rounded-lg hover:bg-brand-50"
+                  className="px-3.5 py-2 text-sm font-medium text-brand-600 border border-brand-600 rounded-lg hover:bg-brand-50 hover:scale-[1.03] active:scale-[0.97] transition-transform"
                 >
                   Join as Institution
                 </Link>
                 <Link
                   to="/register/expert"
-                  className="px-3.5 py-2 text-sm font-medium text-white bg-brand-600 rounded-lg hover:bg-brand-700"
+                  className="px-3.5 py-2 text-sm font-medium text-white bg-brand-600 rounded-lg hover:bg-brand-700 hover:scale-[1.03] active:scale-[0.97] transition-transform"
                 >
                   Join as Expert
                 </Link>
@@ -90,7 +90,7 @@ export const Navbar = () => {
       </div>
 
       {isOpen && (
-        <div className="md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-4 space-y-2">
+        <div className="md:hidden border-b border-slate-200 bg-white px-4 pt-2 pb-4 space-y-2 mobile-menu-animate">
           <Link to="/" onClick={() => setIsOpen(false)} className="block py-2 text-sm font-medium text-slate-700">Home</Link>
           <Link to="/about" onClick={() => setIsOpen(false)} className="block py-2 text-sm font-medium text-slate-700">About</Link>
           <Link to="/how-it-works" onClick={() => setIsOpen(false)} className="block py-2 text-sm font-medium text-slate-700">How It Works</Link>

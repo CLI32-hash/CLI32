@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { ScrollReveal } from '../../components/common/ScrollReveal';
 import {
   Mail, Phone, MapPin, Send, ArrowRight, ChevronDown, Users,
   CheckCircle2, Sparkles, ShieldCheck, Lock, Clock, Award, Shield,
@@ -149,7 +150,7 @@ export const Contact = () => {
           </div>
 
           {/* Right Column: Hero Photo Card with Floating Badge */}
-          <div className="lg:col-span-5 relative mt-4 lg:mt-0">
+          <ScrollReveal direction="right" className="lg:col-span-5 relative mt-4 lg:mt-0">
             {/* Background Glow */}
             <div className="absolute -inset-2 bg-gradient-to-tr from-blue-300/30 via-indigo-200/20 to-blue-400/20 rounded-3xl blur-2xl -z-10" />
 
@@ -171,13 +172,14 @@ export const Contact = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </ScrollReveal>
 
         </section>
 
         {/* ========================================================================= */}
         {/* VERIFICATION & TRUST BADGES SECTION                                       */}
         {/* ========================================================================= */}
+        <ScrollReveal>
         <section className="bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xs space-y-6">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-6">
             <div>
@@ -216,6 +218,7 @@ export const Contact = () => {
             ))}
           </div>
         </section>
+        </ScrollReveal>
 
         {/* ========================================================================= */}
         {/* BOTTOM SECTION: CONTACT FORM + OTHER WAYS TO REACH US                      */}
@@ -223,7 +226,8 @@ export const Contact = () => {
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
 
           {/* Left Column: Contact Form Card */}
-          <div className="lg:col-span-7 bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xs flex flex-col justify-between space-y-6">
+          <ScrollReveal direction="left" className="lg:col-span-7">
+          <div className="h-full bg-white border border-slate-200/80 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xs flex flex-col justify-between space-y-6">
             <div>
               {/* Pill Tag */}
               <div className="mb-3">
@@ -378,9 +382,11 @@ export const Contact = () => {
             </div>
 
           </div>
+          </ScrollReveal>
 
           {/* Right Column: Institutional Partnership & Engagement Desk Sidebar Card */}
-          <div className="lg:col-span-5 bg-[#F4F7FF] border border-blue-100/90 rounded-3xl p-6 sm:p-8 flex flex-col justify-between space-y-6">
+          <ScrollReveal direction="right" className="lg:col-span-5">
+          <div className="h-full bg-[#F4F7FF] border border-blue-100/90 rounded-3xl p-6 sm:p-8 flex flex-col justify-between space-y-6">
             <div className="space-y-6">
               
               {/* Header */}
@@ -492,6 +498,7 @@ export const Contact = () => {
             </div>
 
           </div>
+          </ScrollReveal>
 
         </section>
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { institutionService } from '../../services/institutionService';
@@ -40,6 +40,10 @@ export const RegisterInstitution = () => {
   const [step, setStep] = useState(1); // 1 = account, 2 = details
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+  }, [step]);
   const [formData, setFormData] = useState({
     name: '',
     type: 'College',
@@ -72,7 +76,7 @@ export const RegisterInstitution = () => {
     `w-full ${hasIcon ? 'pl-11' : 'pl-4'} pr-4 py-3 text-sm border border-slate-200 rounded-xl outline-none transition-all bg-white placeholder:text-slate-400 focus:border-blue-500 focus:ring-3 focus:ring-blue-100`;
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-[#F8FAFC]">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-[#F8FAFC] animate-fade">
 
       {/* ════════════════════════════════════════
           LEFT PANEL — Branding
@@ -85,20 +89,8 @@ export const RegisterInstitution = () => {
         <div className="absolute top-1/3 right-24 w-1.5 h-1.5 bg-white/15 rounded-full" />
         <div className="absolute bottom-1/4 right-8 w-1 h-1 bg-white/20 rounded-full" />
 
-        {/* Logo */}
-        <div className="relative z-10 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2.5">
-            <div className="bg-[#0f172a] text-white p-2 rounded-xl border border-white/20 shadow-sm flex items-center justify-center">
-              <BookOpen className="w-6 h-6 text-white" />
-            </div>
-            <span className="font-bold text-xl tracking-tight text-white">
-              Real World <span className="text-blue-200">Integration</span>
-            </span>
-          </Link>
-        </div>
-
         {/* Hero copy */}
-        <div className="relative z-10 space-y-6">
+        <div className="relative z-10 space-y-6 pt-4">
           <div>
             <p className="text-blue-200/70 text-xs font-bold tracking-widest uppercase mb-3">Join as Institution</p>
             <h1 className="text-4xl xl:text-5xl font-extrabold text-white leading-tight tracking-tight">
@@ -188,9 +180,8 @@ export const RegisterInstitution = () => {
               {[1, 2].map(s => (
                 <React.Fragment key={s}>
                   <div className="flex items-center gap-2">
-                    <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
-                      step > s ? 'bg-emerald-500 text-white' : step === s ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-400'
-                    }`}>
+                    <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${step > s ? 'bg-emerald-500 text-white' : step === s ? 'bg-blue-600 text-white' : 'bg-slate-100 text-slate-400'
+                      }`}>
                       {step > s ? <CheckCircle className="w-4 h-4" /> : s}
                     </div>
                     <span className={`text-[11px] font-semibold hidden sm:block ${step >= s ? 'text-slate-700' : 'text-slate-400'}`}>

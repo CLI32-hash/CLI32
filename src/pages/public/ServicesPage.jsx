@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { ScrollReveal } from '../../components/common/ScrollReveal';
 import service_image from '../../assets/service_image.png';
 
 import {
@@ -133,7 +134,7 @@ export const ServicesPage = () => {
         </div>
 
         {/* Right Column: Hero Image with Glassmorphic Overlay */}
-        <div className="lg:col-span-6 relative">
+        <ScrollReveal direction="right" className="lg:col-span-6 relative">
           <div className="relative rounded-3xl overflow-hidden shadow-xl border border-slate-200/80 bg-slate-900 group">
             <img
               src={service_image}
@@ -150,7 +151,7 @@ export const ServicesPage = () => {
               </p>
             </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
 
       {/* Mobile-only Section Title */}
@@ -168,7 +169,7 @@ export const ServicesPage = () => {
             <Link
               key={svc.id}
               to={`/experts?service=${encodeURIComponent(svc.serviceParam)}`}
-              className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-7 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between group space-y-6 cursor-pointer"
+              className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-7 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between group space-y-6 cursor-pointer card-animate-hover"
             >
               <div className="space-y-4">
                 {/* Header with Icon and Title */}
@@ -204,6 +205,7 @@ export const ServicesPage = () => {
       {/* ========================================================================= */}
       {/* 4. BOTTOM BANNER CARD ("Looking for a customized engagement?") */}
       {/* ========================================================================= */}
+      <ScrollReveal direction="scale">
       <div className="bg-gradient-to-br from-blue-50/90 via-sky-50/50 to-indigo-50/40 border border-blue-100/90 rounded-3xl p-6 sm:p-10 shadow-2xs flex flex-col md:flex-row items-center justify-between gap-8 overflow-hidden relative">
         {/* Subtle background glow */}
         <div className="absolute top-0 right-0 w-80 h-80 bg-blue-400/10 rounded-full blur-3xl pointer-events-none" />
@@ -270,6 +272,7 @@ export const ServicesPage = () => {
           </svg>
         </div>
       </div>
+      </ScrollReveal>
     </div>
   );
 };

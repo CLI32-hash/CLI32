@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { ScrollReveal } from '../../components/common/ScrollReveal';
 import { expertService } from '../../services/expertService';
 import { useAuth } from '../../context/AuthContext';
 import { EnquiryModal } from '../../components/forms/EnquiryModal';
@@ -133,6 +134,7 @@ export const ExpertProfile = () => {
       </Link>
 
       {/* Header Card with Circular WhatsApp Avatar */}
+      <ScrollReveal>
       <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-2xs">
         <div className="flex flex-col sm:flex-row justify-between items-start gap-6">
           <div className="flex items-start gap-5">
@@ -173,6 +175,7 @@ export const ExpertProfile = () => {
           </button>
         </div>
       </div>
+      </ScrollReveal>
 
       {/* Main Grid: About & Core Services */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

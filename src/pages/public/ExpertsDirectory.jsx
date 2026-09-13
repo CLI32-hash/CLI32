@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { ScrollReveal } from '../../components/common/ScrollReveal';
 import { useApp } from '../../context/AppContext';
 import { useAuth } from '../../context/AuthContext';
 import { availableServiceCategories } from '../../data/services';
@@ -430,7 +431,7 @@ export const ExpertsDirectory = () => {
                 return (
                   <div
                     key={exp.id}
-                    className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xs hover:shadow-md transition-all flex flex-col justify-between group space-y-3 sm:space-y-4"
+                    className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-2xs hover:shadow-md card-animate-hover flex flex-col justify-between group space-y-3 sm:space-y-4"
                   >
                     <div className="space-y-3 sm:space-y-4">
                       {/* Top Row: Available Status Badge + Bookmark */}
@@ -455,7 +456,7 @@ export const ExpertsDirectory = () => {
                         <img
                           src={avatar}
                           alt={exp.name}
-                          className="w-14 h-14 rounded-full object-cover border-2 border-slate-100 shadow-2xs shrink-0 ring-2 ring-slate-50"
+                          className="w-14 h-14 rounded-full object-cover border-2 border-slate-100 shadow-2xs shrink-0 ring-2 ring-slate-50 expert-avatar-hover"
                         />
                         <div>
                           <h3 className="font-extrabold text-slate-900 text-[15px] leading-snug group-hover:text-[#1D58D8] transition-colors">
@@ -615,6 +616,7 @@ export const ExpertsDirectory = () => {
       {/* ========================================================================= */}
       {/* 5. BOTTOM TRUST BAR */}
       {/* ========================================================================= */}
+      <ScrollReveal>
       <div className="bg-white border border-slate-200/90 rounded-3xl p-6 sm:p-8 shadow-2xs">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <div className="flex items-start gap-3">
@@ -666,6 +668,7 @@ export const ExpertsDirectory = () => {
           </div>
         </div>
       </div>
+      </ScrollReveal>
 
       {/* ========================================================================= */}
       {/* 6. REGISTRATION REQUIRED MODAL (Auth Gate) */}

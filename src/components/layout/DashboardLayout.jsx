@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { SidebarDecoration } from '../common/SidebarDecoration';
 import {
   LayoutDashboard,
   User,
@@ -19,6 +20,7 @@ import {
   Bell,
   Command,
   HelpCircle,
+  Headphones,
   ArrowRight,
   Mail,
   ChevronDown,
@@ -43,7 +45,7 @@ export const DashboardLayout = ({ role }) => {
         { name: 'Dashboard', path: '/expert/dashboard', icon: LayoutDashboard },
         { name: 'My Profile', path: '/expert/profile', icon: User },
         { name: 'My Services', path: '/expert/services', icon: Briefcase },
-        { name: 'My Enquiries', path: '/expert/enquiries', icon: Inbox },
+        { name: 'My Enquiries', path: '/expert/enquiries', icon: Mail },
       ];
     }
     if (role === 'INSTITUTION') {
@@ -163,7 +165,7 @@ export const DashboardLayout = ({ role }) => {
             </div>
 
             {/* Navigation Links */}
-            <nav className="px-3 py-3 space-y-0.5">
+            <nav className="px-3 py-3 space-y-1">
               {navLinks.map((link) => {
                 const Icon = link.icon;
                 const active = isActiveLink(link.name);
@@ -172,15 +174,15 @@ export const DashboardLayout = ({ role }) => {
                     key={link.name}
                     to={link.path}
                     onClick={() => setMobileMenuOpen(false)}
-                    className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-[13px] font-semibold transition-all ${
+                    className={`flex items-center gap-3 px-3.5 py-2.5 rounded-2xl text-[13.5px] font-semibold transition-all ${
                       active
-                        ? 'bg-blue-50 text-blue-700'
-                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-800'
+                        ? 'bg-[#EBF2FF] text-[#1D58D8] font-bold'
+                        : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
                     }`}
                   >
-                    <Icon className={`w-[18px] h-[18px] ${active ? 'text-blue-600' : 'text-slate-400'}`} />
+                    <Icon className={`w-[18px] h-[18px] ${active ? 'text-[#1D58D8]' : 'text-slate-400'}`} />
                     <span className="flex-1">{link.name}</span>
-                    <ChevronRight className={`w-4 h-4 ${active ? 'text-blue-400' : 'text-slate-300'}`} />
+                    <ChevronRight className={`w-4 h-4 ${active ? 'text-[#1D58D8]' : 'text-slate-300'}`} />
                   </Link>
                 );
               })}
@@ -189,14 +191,21 @@ export const DashboardLayout = ({ role }) => {
             {/* Drawer Footer — Need Help + Sign Out */}
             <div className="mt-auto px-4 py-4 border-t border-slate-100 space-y-3">
               {/* Need Help */}
-              <div className="bg-blue-50/70 border border-blue-100 rounded-xl p-3">
-                <div className="flex items-center gap-2 mb-1.5">
-                  <HelpCircle className="w-4 h-4 text-blue-600" />
-                  <span className="text-[12px] font-bold text-slate-800">Need Help?</span>
+              <div className="bg-white border border-blue-100/90 rounded-2xl p-3.5 shadow-2xs space-y-2">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-lg bg-blue-50 text-[#1D58D8] flex items-center justify-center">
+                    <Headphones className="w-3.5 h-3.5 text-[#1D58D8]" />
+                  </div>
+                  <span className="text-[12px] font-extrabold text-[#0F172A]">Need Help?</span>
                 </div>
                 <p className="text-[11px] text-slate-500 leading-relaxed">Our team is here to support you.</p>
-                <button className="mt-2 text-[11px] font-bold text-blue-600 flex items-center gap-1 cursor-pointer">
-                  Contact Support <ArrowRight className="w-3 h-3" />
+                <div className="flex items-center gap-1.5 text-[10px] font-bold text-slate-700">
+                  <Mail className="w-3 h-3 text-slate-400 shrink-0" />
+                  <span className="truncate">admin@realworldintegration.org</span>
+                </div>
+                <button className="mt-1 px-3 py-1 bg-[#EBF2FF] hover:bg-blue-100 text-[#1D58D8] text-[10px] font-bold rounded-full inline-flex items-center gap-1 transition-colors cursor-pointer">
+                  <span>Contact Support</span>
+                  <ArrowRight className="w-2.5 h-2.5" />
                 </button>
               </div>
 
@@ -216,22 +225,23 @@ export const DashboardLayout = ({ role }) => {
       {/* ═══════════════════════════════════════════════════
           DESKTOP: Sidebar (hidden on mobile)
           ═══════════════════════════════════════════════════ */}
-      <aside className="hidden md:flex fixed md:sticky top-0 bottom-0 left-0 z-50 md:z-10 w-[220px] bg-white border-r border-slate-200/80 flex-col justify-between shrink-0 shadow-2xs h-screen overflow-y-auto">
-        <div>
+      <aside className="hidden md:flex fixed md:sticky top-0 bottom-0 left-0 z-50 md:z-10 w-[240px] bg-white border-r border-slate-200/80 flex-col justify-between shrink-0 shadow-2xs h-screen overflow-hidden relative">
+        <div className="relative z-10">
           {/* Real World Integration Logo */}
           <div className="px-5 py-5 border-b border-slate-100">
-            <Link to="/" className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-[#0c1938] flex items-center justify-center shadow-sm shrink-0">
-                <BookOpen className="w-4.5 h-4.5 text-white stroke-[2.2]" />
+            <Link to="/" className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-2xl bg-[#0c1938] flex items-center justify-center shadow-xs shrink-0">
+                <BookOpen className="w-5 h-5 text-white stroke-[2.2]" />
               </div>
-              <div className="font-extrabold text-[15px] tracking-tight text-[#0c1938] leading-tight">
-                Real World <span className="text-[#1D58D8]">Integration</span>
+              <div className="font-extrabold text-[15px] tracking-tight leading-tight">
+                <span className="text-[#0c1938] block">Real World</span>
+                <span className="text-[#1D58D8] block">Integration</span>
               </div>
             </Link>
           </div>
 
           {/* Navigation */}
-          <nav className="px-3 py-4 space-y-0.5">
+          <nav className="px-3.5 py-4 space-y-1.5">
             {navLinks.map((link) => {
               const Icon = link.icon;
               const active = isActiveLink(link.name);
@@ -240,35 +250,48 @@ export const DashboardLayout = ({ role }) => {
                 <Link
                   key={link.name}
                   to={link.path}
-                  className={`flex items-center gap-2.5 px-3 py-2 text-[13px] font-semibold transition-all ${
+                  className={`flex items-center gap-3 px-4 py-3 rounded-2xl text-[13.5px] font-semibold transition-all duration-200 ${
                     active
-                      ? 'bg-blue-50 text-blue-700 rounded-xl'
-                      : 'text-slate-500 hover:bg-slate-50 hover:text-slate-800 rounded-xl'
+                      ? 'bg-[#EBF2FF] text-[#1D58D8] font-bold shadow-xs shadow-blue-500/5'
+                      : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
                   }`}
                 >
-                  <Icon className={`w-[18px] h-[18px] ${active ? 'text-blue-600' : 'text-slate-400'}`} />
-                  {link.name}
+                  <Icon className={`w-[18px] h-[18px] transition-colors ${active ? 'text-[#1D58D8] stroke-[2.2]' : 'text-slate-400'}`} />
+                  <span>{link.name}</span>
                 </Link>
               );
             })}
           </nav>
         </div>
 
-        {/* Need Help? Card */}
-        <div className="px-4 pb-4">
-          <div className="bg-blue-50/70 border border-blue-100 rounded-2xl p-4">
-            <div className="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center mb-3">
-              <HelpCircle className="w-5 h-5 text-blue-600" />
+        {/* ── Flexible Animated Decorative Paper-Plane Area ── */}
+        <div className="flex-1 relative min-h-[140px] overflow-hidden flex items-end justify-center pointer-events-none select-none">
+          <SidebarDecoration />
+        </div>
+
+        {/* ── Need Help? Card at Bottom ── */}
+        <div className="p-3.5 relative z-10">
+          <div className="bg-white/90 backdrop-blur-md border border-blue-100/90 rounded-3xl p-4 shadow-sm space-y-2">
+            <div className="w-8 h-8 rounded-xl bg-blue-50 text-[#1D58D8] flex items-center justify-center">
+              <Headphones className="w-4.5 h-4.5 text-[#1D58D8]" />
             </div>
-            <h4 className="text-[13px] font-bold text-slate-800">Need Help?</h4>
-            <p className="text-[11px] text-slate-500 mt-1 leading-relaxed">Our team is here to support you.</p>
-            <div className="flex items-center gap-1.5 mt-2">
-              <Mail className="w-3 h-3 text-slate-400" />
-              <span className="text-[10px] text-slate-500 font-medium">admin@apexinstitute.edu</span>
+            <div>
+              <h4 className="text-[13px] font-extrabold text-[#0F172A]">Need Help?</h4>
+              <p className="text-[11px] text-slate-500 font-medium leading-relaxed">Our team is here to support you.</p>
             </div>
-            <button className="mt-3 text-[11px] font-bold text-blue-600 hover:text-blue-700 flex items-center gap-1 transition-colors cursor-pointer">
-              Contact Support <ArrowRight className="w-3 h-3" />
-            </button>
+            <div className="flex items-center gap-1.5 pt-0.5">
+              <Mail className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+              <span className="text-[11px] font-bold text-slate-700 truncate">admin@realworldintegration.org</span>
+            </div>
+            <div className="pt-1">
+              <button
+                type="button"
+                className="px-3.5 py-1.5 bg-[#EBF2FF] hover:bg-blue-100 text-[#1D58D8] text-[11px] font-extrabold rounded-full inline-flex items-center gap-1 transition-all active:scale-[0.98] cursor-pointer"
+              >
+                <span>Contact Support</span>
+                <ArrowRight className="w-3 h-3" />
+              </button>
+            </div>
           </div>
         </div>
       </aside>
@@ -307,8 +330,11 @@ export const DashboardLayout = ({ role }) => {
               </div>
               <div className="hidden lg:block">
                 <div className="text-xs font-bold text-slate-800 leading-tight">{userName}</div>
-                <div className="text-[10px] text-slate-400 font-medium">Admin</div>
+                <div className="text-[10px] text-slate-400 font-medium">
+                  {role === 'EXPERT' ? 'Expert' : role === 'INSTITUTION' ? 'Institution' : 'Admin'}
+                </div>
               </div>
+              <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
               <button
                 onClick={handleLogout}
                 className="p-1.5 rounded-lg text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors ml-1 cursor-pointer"

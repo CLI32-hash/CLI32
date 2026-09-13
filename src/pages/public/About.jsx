@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { ScrollReveal } from '../../components/common/ScrollReveal';
 import aboutHeroImg from '../../assets/about1.png';
 import storyImg from '../../assets/hero-main.png';
 import about2 from '../../assets/about2.png';
@@ -266,6 +267,7 @@ export const About = () => {
       {/* ========================================================================= */}
       {/* 2. OUR STORY SECTION */}
       {/* ========================================================================= */}
+      <ScrollReveal>
       <section className="relative pt-4 sm:pt-6">
         <div className="bg-gradient-to-b from-slate-50/80 via-blue-50/30 to-white border border-slate-200/80 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xs">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
@@ -342,10 +344,12 @@ export const About = () => {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* ========================================================================= */}
       {/* 3. VALUES SECTION — "What We Stand For" */}
       {/* ========================================================================= */}
+      <ScrollReveal>
       <section className="relative">
         {/* Soft gradient container matching screenshot */}
         <div className="bg-gradient-to-br from-blue-50/70 via-sky-50/40 to-indigo-50/30 border border-blue-100/60 rounded-3xl p-7 sm:p-10 shadow-2xs relative overflow-hidden">
@@ -394,6 +398,7 @@ export const About = () => {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* ========================================================================= */}
       {/* 4. STATISTICS SECTION — Light background row matching screenshot */}
@@ -436,6 +441,7 @@ export const About = () => {
       {/* ========================================================================= */}
       {/* 5. CALL TO ACTION BANNER */}
       {/* ========================================================================= */}
+      <ScrollReveal direction="scale">
       <section className="relative pb-6">
         <div className="bg-[#0b172b] border border-slate-800 rounded-3xl p-7 sm:p-10 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative">
           {/* Subtle accent wave line / glow */}
@@ -465,6 +471,7 @@ export const About = () => {
           </div>
         </div>
       </section>
+      </ScrollReveal>
     </div>
   );
 };

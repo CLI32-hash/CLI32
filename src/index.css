@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap');
 
 @import "tailwindcss";
 
@@ -78,6 +79,31 @@
 }
 .animate-align-text {
   animation: align-text 3.2s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+/* Sidebar Paper Plane & Trail Animations */
+@keyframes plane-float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(3deg);
+  }
+}
+
+@keyframes trail-dash {
+  to {
+    stroke-dashoffset: -24;
+  }
+}
+
+.animate-plane-float {
+  animation: plane-float 3.5s ease-in-out infinite;
+}
+
+.animate-trail-dash {
+  stroke-dasharray: 4 4;
+  animation: trail-dash 2.8s linear infinite;
 }
 
 /* Base resets and Google-like minimalist setup */
@@ -254,4 +280,164 @@ input, select, textarea {
 @keyframes slideInLeft {
   from { transform: translateX(-100%); }
   to { transform: translateX(0); }
+}
+
+/* ============================================================
+   9. PAGE TRANSITION (route change fade + slide)
+   ============================================================ */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.page-transition {
+  animation: page-enter 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ============================================================
+   10. STAGGERED ENTRANCE FOR AUTH / SPLIT-PANEL PAGES
+   ============================================================ */
+@keyframes stagger-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.stagger-item {
+  opacity: 0;
+  animation: stagger-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ============================================================
+   11. NAV LINK ANIMATED UNDERLINE
+   ============================================================ */
+.nav-link-animated {
+  position: relative;
+  display: inline-block;
+}
+.nav-link-animated::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #1D58D8;
+  border-radius: 9999px;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.nav-link-animated:hover::after {
+  width: 100%;
+}
+.nav-link-animated:hover {
+  color: #1D58D8;
+}
+
+/* ============================================================
+   12. ENHANCED CARD HOVER (service/feature cards)
+   ============================================================ */
+.card-animate-hover {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s ease;
+}
+.card-animate-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.08), 0 4px 8px -2px rgba(0, 0, 0, 0.03);
+}
+
+/* ============================================================
+   13. CTA BUTTON ARROW ANIMATION
+   ============================================================ */
+.btn-arrow-animate .arrow-icon {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-arrow-animate:hover .arrow-icon {
+  transform: translateX(3px);
+}
+
+/* ============================================================
+   14. MOBILE MENU SLIDE-DOWN ANIMATION
+   ============================================================ */
+@keyframes menu-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.mobile-menu-animate {
+  animation: menu-slide-down 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ============================================================
+   15. FORM INPUT FOCUS ENHANCEMENT
+   ============================================================ */
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #1D58D8;
+  box-shadow: 0 0 0 3px rgba(29, 88, 216, 0.1);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* ============================================================
+   16. EXPERT CARD AVATAR HOVER
+   ============================================================ */
+.expert-avatar-hover {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.expert-avatar-hover:hover {
+  transform: scale(1.04);
+}
+
+/* ============================================================
+   17. REDUCED MOTION — Accessibility
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .animate-float-badge,
+  .animate-float-badge-reverse,
+  .animate-pulse-soft {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   18. REDUCED FLOATING ON MOBILE
+   ============================================================ */
+@media (max-width: 640px) {
+  .animate-float-badge {
+    animation-duration: 4.5s;
+  }
+  .animate-float-badge-reverse {
+    animation-duration: 5.2s;
+  }
+  @keyframes float-badge {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-4px); }
+  }
+  @keyframes float-badge-reverse {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(4px); }
+  }
 }

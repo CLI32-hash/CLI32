@@ -56,7 +56,7 @@ export const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col lg:flex-row bg-[#F8FAFC]">
+    <div className="min-h-screen flex flex-col lg:flex-row bg-[#F8FAFC] animate-fade">
       {/* ================================================================ */}
       {/* LEFT PANEL — Branding (hidden on mobile, shown on lg+)           */}
       {/* ================================================================ */}
