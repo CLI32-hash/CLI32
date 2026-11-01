@@ -2,14 +2,12 @@ import React, { useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ScrollReveal } from '../../components/common/ScrollReveal';
 import aboutHeroImg from '../../assets/about1.png';
-import storyImg from '../../assets/hero-main.png';
 import about2 from '../../assets/about2.png';
 import {
   GraduationCap,
   Users,
   Sparkles,
-  Tv,
-  Users2,
+  Presentation,
   Compass,
   FileCode2,
   BookOpen,
@@ -21,7 +19,11 @@ import {
   Building2,
   Layers,
   CheckCircle2,
-  Handshake
+  Handshake,
+  Target,
+  Check,
+  ShieldCheck,
+  Lightbulb
 } from 'lucide-react';
 
 export const About = () => {
@@ -30,7 +32,7 @@ export const About = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Structured statistics data (easy to update or replace later)
+  // Structured statistics data
   const statsData = [
     {
       id: 'institutions',
@@ -71,46 +73,76 @@ export const About = () => {
     }
   ];
 
-  // 4 Core Values — icons matching screenshot reference
+  // 4 Core Values
   const values = [
     {
       id: 'connection',
       title: 'Industry Connection',
       description: 'Bringing institutions and experienced professionals together.',
       icon: Layers,
-      iconBg: 'bg-blue-100 text-[#1D58D8]'
+      colorClass: 'bg-blue-50 text-[#1D58D8] border-blue-100'
     },
     {
       id: 'practical',
       title: 'Practical Learning',
       description: 'Helping students gain knowledge beyond traditional classrooms.',
       icon: Sparkles,
-      iconBg: 'bg-emerald-100 text-emerald-600'
+      colorClass: 'bg-emerald-50 text-[#059669] border-emerald-100'
     },
     {
       id: 'collaboration',
       title: 'Collaboration',
       description: 'Creating meaningful connections between academia and industry.',
-      icon: Users2,
-      iconBg: 'bg-purple-100 text-purple-600'
+      icon: Handshake,
+      colorClass: 'bg-purple-50 text-purple-600 border-purple-100'
     },
     {
       id: 'future-ready',
       title: 'Future Ready',
       description: 'Preparing students with relevant skills and real-world exposure.',
       icon: TrendingUp,
-      iconBg: 'bg-blue-100 text-[#1D58D8]'
+      colorClass: 'bg-amber-50 text-amber-600 border-amber-100'
     }
   ];
 
-  // Collaboration pillars for Our Story
+  // Collaboration formats
   const collaborationFormats = [
-    { title: 'Guest Lectures', desc: 'Real-world insights from active practitioners', icon: Tv, color: 'text-blue-600 bg-blue-50' },
-    { title: 'Workshops', desc: 'Hands-on practical tool and skill sessions', icon: Users2, color: 'text-emerald-600 bg-emerald-50' },
-    { title: 'Mentorship', desc: 'Personal guidance for student career growth', icon: Compass, color: 'text-amber-600 bg-amber-50' },
-    { title: 'Student Projects', desc: 'Live problem-solving and portfolio building', icon: FileCode2, color: 'text-cyan-600 bg-cyan-50' },
-    { title: 'Curriculum Development', desc: 'Modernizing syllabi for market readiness', icon: BookOpen, color: 'text-purple-600 bg-purple-50' },
-    { title: 'Consultancy', desc: 'Strategic advisory for academic excellence', icon: Briefcase, color: 'text-indigo-600 bg-indigo-50' }
+    {
+      title: 'Guest Lectures',
+      desc: 'Real-world insights and emerging trends delivered directly to classrooms.',
+      icon: Presentation,
+      color: 'text-blue-600 bg-blue-50 border-blue-100'
+    },
+    {
+      title: 'Workshops & Skill Training',
+      desc: 'Hands-on, practical sessions focused on tools and current industry practices.',
+      icon: Sparkles,
+      color: 'text-emerald-600 bg-emerald-50 border-emerald-100'
+    },
+    {
+      title: 'Mentorship',
+      desc: 'Personal guidance for student career growth, portfolios, and leadership.',
+      icon: Compass,
+      color: 'text-amber-600 bg-amber-50 border-amber-100'
+    },
+    {
+      title: 'Student Projects',
+      desc: 'Advising on capstone projects, live problem-solving, and applied research.',
+      icon: FileCode2,
+      color: 'text-cyan-600 bg-cyan-50 border-cyan-100'
+    },
+    {
+      title: 'Curriculum Co-Design',
+      desc: 'Modernizing syllabi and aligning academic coursework with industry requirements.',
+      icon: BookOpen,
+      color: 'text-teal-600 bg-teal-50 border-teal-100'
+    },
+    {
+      title: 'Internships & Placement',
+      desc: 'Connecting students with valuable workplace exposure and recruitment pathways.',
+      icon: Briefcase,
+      color: 'text-purple-600 bg-purple-50 border-purple-100'
+    }
   ];
 
   // Animated In-Viewport Counter Hook
@@ -131,7 +163,6 @@ export const About = () => {
           const timer = setInterval(() => {
             currentStep++;
             const progress = Math.min(currentStep / steps, 1);
-            // Ease out cubic
             const easeProgress = 1 - Math.pow(1 - progress, 3);
 
             setCounts(
@@ -156,9 +187,9 @@ export const About = () => {
   }, [hasAnimated]);
 
   return (
-    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-4 sm:py-8 space-y-12 sm:space-y-16 lg:space-y-20">
+    <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 py-4 sm:py-8 space-y-14 sm:space-y-20 lg:space-y-24 animate-fade">
       {/* ========================================================================= */}
-      {/* BREADCRUMBS */}
+      {/* BREADCRUMB */}
       {/* ========================================================================= */}
       <nav aria-label="Breadcrumb" className="flex items-center gap-2 text-xs font-semibold text-slate-500">
         <Link to="/" className="hover:text-[#1D58D8] transition-colors">Home</Link>
@@ -169,93 +200,96 @@ export const About = () => {
       {/* ========================================================================= */}
       {/* 1. HERO SECTION */}
       {/* ========================================================================= */}
-      <section className="relative pt-2 sm:pt-4">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          {/* Left Column: Eyebrow, Main Heading, Supporting Text, 3 Benefit Items */}
-          <div className="lg:col-span-6 space-y-6 sm:space-y-7 animate-slide-up-smooth">
-            {/* Eyebrow */}
-            <div className="inline-flex items-center px-4 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-[#1D58D8] text-[11px] sm:text-xs font-extrabold uppercase tracking-wider shadow-2xs">
+      <section className="relative">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+          {/* Left Column */}
+          <div className="lg:col-span-6 space-y-6 sm:space-y-7 text-left animate-slide-up-smooth">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-50 border border-blue-200 text-[#1D58D8] text-[11px] sm:text-xs font-bold tracking-wider uppercase shadow-2xs">
+              <Sparkles className="w-3.5 h-3.5 text-[#1D58D8]" />
               ABOUT REAL WORLD INTEGRATION
             </div>
 
-            {/* Main Heading */}
-            <h1 className="text-3xl sm:text-4xl lg:text-[46px] font-extrabold text-[#0F172A] tracking-tight leading-[1.12]">
+            <h1 className="text-3xl sm:text-4xl lg:text-[48px] font-extrabold text-[#0F172A] tracking-tight leading-[1.12]">
               Bridging Academia <br />
               <span className="text-[#1D58D8]">with Industry</span>
             </h1>
 
-            {/* Supporting Text */}
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed max-w-xl">
-              Real World Integration connects educational institutions with industry professionals to create real-world learning, practical exposure, and meaningful opportunities for students.
+              Real World Integration connects higher education institutions with industry practitioners to deliver practical knowledge, applied learning, and career-defining mentorship into academic environments.
             </p>
 
-            {/* Three Benefit Items with Staggered Entrance */}
-            <div className="grid grid-cols-3 gap-3 sm:gap-4 pt-2">
-              {/* Item 1 */}
-              <div
-                className="flex flex-col items-center text-center p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs hover:shadow-md hover:border-blue-200 transition-all duration-300"
-                style={{ animation: 'slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both' }}
-              >
-                <div className="w-11 h-11 rounded-xl bg-blue-50 text-[#1D58D8] flex items-center justify-center mb-2.5 shadow-2xs">
+            {/* Benefit Feature Pills */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+              <div className="flex items-center sm:flex-col sm:items-start gap-3 p-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:border-blue-200 hover:shadow-xs transition-all">
+                <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#1D58D8] border border-blue-100 flex items-center justify-center shrink-0">
                   <GraduationCap className="w-5 h-5" />
                 </div>
-                <span className="text-xs sm:text-sm font-bold text-slate-800 leading-tight">
-                  Real-World Learning
-                </span>
+                <div>
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 leading-tight">Applied Learning</h4>
+                  <p className="text-[11px] text-slate-500 mt-0.5">Practical classroom focus</p>
+                </div>
               </div>
 
-              {/* Item 2 */}
-              <div
-                className="flex flex-col items-center text-center p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs hover:shadow-md hover:border-emerald-200 transition-all duration-300"
-                style={{ animation: 'slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both' }}
-              >
-                <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-2.5 shadow-2xs">
+              <div className="flex items-center sm:flex-col sm:items-start gap-3 p-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:border-emerald-200 hover:shadow-xs transition-all">
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 text-[#059669] border border-emerald-100 flex items-center justify-center shrink-0">
                   <Users className="w-5 h-5" />
                 </div>
-                <span className="text-xs sm:text-sm font-bold text-slate-800 leading-tight">
-                  Industry Expertise
-                </span>
+                <div>
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 leading-tight">Industry Experts</h4>
+                  <p className="text-[11px] text-slate-500 mt-0.5">Vetted practitioners</p>
+                </div>
               </div>
 
-              {/* Item 3 */}
-              <div
-                className="flex flex-col items-center text-center p-3.5 sm:p-4 rounded-2xl bg-white border border-slate-200/80 shadow-2xs hover:shadow-md hover:border-amber-200 transition-all duration-300"
-                style={{ animation: 'slide-up 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both' }}
-              >
-                <div className="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-2.5 shadow-2xs">
-                  <Sparkles className="w-5 h-5" />
+              <div className="flex items-center sm:flex-col sm:items-start gap-3 p-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs hover:border-amber-200 hover:shadow-xs transition-all">
+                <div className="w-10 h-10 rounded-xl bg-amber-50 text-[#D97706] border border-amber-100 flex items-center justify-center shrink-0">
+                  <TrendingUp className="w-5 h-5" />
                 </div>
-                <span className="text-xs sm:text-sm font-bold text-slate-800 leading-tight">
-                  Future-Ready Students
-                </span>
+                <div>
+                  <h4 className="text-xs sm:text-sm font-bold text-slate-900 leading-tight">Career Readiness</h4>
+                  <p className="text-[11px] text-slate-500 mt-0.5">Future-ready graduates</p>
+                </div>
               </div>
+            </div>
+
+            {/* CTAs */}
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              <Link
+                to="/services"
+                className="btn-arrow-animate inline-flex items-center gap-2 px-6 py-3 bg-[#1D58D8] hover:bg-[#1546B8] text-white rounded-full text-xs sm:text-sm font-bold transition-all shadow-sm"
+              >
+                Explore Services <ArrowRight className="w-4 h-4 arrow-icon" />
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white border border-slate-300 text-slate-800 hover:bg-slate-50 rounded-full text-xs sm:text-sm font-bold transition-all shadow-2xs"
+              >
+                Contact Us
+              </Link>
             </div>
           </div>
 
-          {/* Right Column: Hero Image with Soft Glow & Floating Badge */}
-          <div className="lg:col-span-6 relative">
-            {/* Subtle Blue Glow / Gradient behind image */}
-            <div className="absolute -inset-3 sm:-inset-4 bg-gradient-to-tr from-blue-600/15 via-sky-400/15 to-indigo-500/10 rounded-[28px] sm:rounded-[32px] blur-2xl pointer-events-none" />
+          {/* Right Column: Visual with Ambient Glow */}
+          <div className="lg:col-span-6 relative flex justify-center items-center">
+            <div className="absolute -inset-4 bg-gradient-to-tr from-blue-500/15 via-sky-300/15 to-indigo-500/10 rounded-3xl blur-2xl pointer-events-none" />
 
-            {/* Container with ~20-24px border radius */}
-            <div className="relative rounded-[22px] sm:rounded-[24px] overflow-hidden border border-slate-200/80 bg-white shadow-xl animate-hero-img">
+            <div className="relative rounded-3xl overflow-hidden border border-slate-200/90 bg-white shadow-xl w-full">
               <img
                 src={aboutHeroImg}
-                alt="Real World Integration - Bridging Education and Industry"
-                className="w-full h-auto object-contain block"
+                alt="Bridging Academia with Industry"
+                className="w-full h-auto object-cover block"
               />
 
-              {/* Small Floating Badge — hidden on mobile so image is fully visible */}
-              <div className="hidden sm:flex absolute bottom-5 left-5 right-5 sm:right-auto sm:max-w-xs bg-white/95 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 sm:p-4 shadow-xl items-center gap-3.5 animate-float-badge z-20">
+              {/* Floating Badge */}
+              <div className="hidden sm:flex absolute bottom-4 left-4 bg-white/95 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 shadow-lg items-center gap-3 animate-float-badge z-20">
                 <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0 text-[#1D58D8]">
                   <Award className="w-5 h-5" />
                 </div>
                 <div>
                   <h4 className="text-xs sm:text-sm font-extrabold text-slate-900 leading-tight">
-                    Real-World Expertise
+                    Direct Practitioner Engagement
                   </h4>
-                  <p className="text-[11px] sm:text-xs text-slate-500 font-medium leading-tight mt-0.5">
-                    Learn from industry professionals
+                  <p className="text-[11px] text-slate-500 font-medium leading-tight mt-0.5">
+                    Connecting institutions &amp; verified leaders
                   </p>
                 </div>
               </div>
@@ -268,19 +302,17 @@ export const About = () => {
       {/* 2. OUR STORY SECTION */}
       {/* ========================================================================= */}
       <ScrollReveal>
-      <section className="relative pt-4 sm:pt-6">
-        <div className="bg-gradient-to-b from-slate-50/80 via-blue-50/30 to-white border border-slate-200/80 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xs">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-            {/* Left Column: Visual Showcase */}
+        <section className="bg-gradient-to-b from-slate-50/80 via-blue-50/20 to-white border border-slate-200/80 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xs">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Visual */}
             <div className="lg:col-span-5 order-2 lg:order-1 relative">
-              <div className="relative rounded-[22px] sm:rounded-[24px] overflow-hidden border border-slate-200/80 shadow-md bg-white">
+              <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-slate-200/90 shadow-md bg-white">
                 <img
                   src={about2}
                   alt="Connecting Education with Real-World Expertise"
                   className="w-full h-auto object-contain block"
                 />
-                {/* Floating pill badge on the visual — hidden on mobile so image is fully visible */}
-                <div className="hidden sm:flex absolute bottom-4 left-4 right-4 bg-slate-900/85 backdrop-blur-md border border-white/20 rounded-xl p-3 text-white items-center gap-3">
+                <div className="absolute bottom-3 left-3 right-3 bg-slate-900/90 backdrop-blur-md border border-white/20 rounded-xl p-3 text-white flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-blue-500/20 border border-blue-400/30 flex items-center justify-center shrink-0">
                     <CheckCircle2 className="w-4 h-4 text-blue-300" />
                   </div>
@@ -291,8 +323,8 @@ export const About = () => {
               </div>
             </div>
 
-            {/* Right Column: Content */}
-            <div className="lg:col-span-7 order-1 lg:order-2 space-y-6 text-left">
+            {/* Story Text */}
+            <div className="lg:col-span-7 order-1 lg:order-2 space-y-5 text-left">
               <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#1D58D8] text-[11px] font-extrabold uppercase tracking-wider">
                 OUR STORY
               </div>
@@ -302,93 +334,201 @@ export const About = () => {
                 <span className="text-[#1D58D8]">Real-World Expertise</span>
               </h2>
 
-              <p className="text-slate-600 text-xs sm:text-sm sm:text-base leading-relaxed">
-                Real World Integration was founded on a straightforward vision: academia provides the vital theoretical foundation, while active industry experts provide the contemporary context. We enable colleges, universities, training institutes, and seasoned industry professionals to seamlessly collaborate through structured, high-impact engagement formats:
-              </p>
-
-              {/* Six Collaboration Formats Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                {collaborationFormats.map((format, idx) => {
-                  const Icon = format.icon;
-                  return (
-                    <div
-                      key={idx}
-                      className="flex items-start gap-3 p-3 sm:p-3.5 rounded-xl bg-white border border-slate-200/90 shadow-2xs hover:border-blue-300 hover:shadow-xs transition-all duration-200"
-                    >
-                      <div className={`w-9 h-9 rounded-lg flex items-center justify-center shrink-0 ${format.color}`}>
-                        <Icon className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <h4 className="text-xs sm:text-sm font-bold text-slate-800 leading-tight">
-                          {format.title}
-                        </h4>
-                        <p className="text-[11px] text-slate-500 font-medium leading-normal mt-0.5">
-                          {format.desc}
-                        </p>
-                      </div>
-                    </div>
-                  );
-                })}
+              <div className="space-y-3.5 text-slate-600 text-sm sm:text-base leading-relaxed">
+                <p>
+                  Education provides the foundation. Real-world experience brings it to life. We believe that connecting educational institutions with experienced professionals can make learning more practical, relevant, and impactful.
+                </p>
+                <p>
+                  Yet, finding the right experts to share their knowledge and industry experience with learners isn't always easy. The Real-World Integration Platform was created to make these connections easier — helping institutions access professional expertise while enabling experienced individuals to discover teaching opportunities and contribute to academic development.
+                </p>
               </div>
 
               <div className="pt-2">
                 <Link
                   to="/services"
-                  className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#1D58D8] hover:text-[#1546B8] group"
+                  className="btn-arrow-animate inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#1D58D8] hover:text-[#1546B8] group"
                 >
                   Explore all academic engagement services
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 arrow-icon" />
                 </Link>
               </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
       </ScrollReveal>
 
       {/* ========================================================================= */}
-      {/* 3. VALUES SECTION — "What We Stand For" */}
+      {/* 3. MISSION & VISION SPOTLIGHT */}
       {/* ========================================================================= */}
       <ScrollReveal>
-      <section className="relative">
-        {/* Soft gradient container matching screenshot */}
-        <div className="bg-gradient-to-br from-blue-50/70 via-sky-50/40 to-indigo-50/30 border border-blue-100/60 rounded-3xl p-7 sm:p-10 shadow-2xs relative overflow-hidden">
-          {/* Ambient glow */}
-          <div className="absolute top-0 right-0 w-72 h-72 bg-blue-400/8 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-56 h-56 bg-indigo-400/8 rounded-full blur-3xl pointer-events-none" />
+        <section className="space-y-8">
+          <div className="text-center space-y-2 max-w-2xl mx-auto">
+            <div className="text-[11px] font-bold uppercase tracking-widest text-[#1D58D8]">
+              PURPOSE &amp; DIRECTION
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] tracking-tight">
+              Empowering Education Through Meaningful Partnerships
+            </h2>
+            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+              Guided by a clear mission and vision to bridge academia and industry seamlessly.
+            </p>
+          </div>
 
-          {/* Section Header */}
-          <div className="mb-7 sm:mb-8 relative z-10">
-            <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-blue-100 border border-blue-200 text-[#1D58D8] text-[11px] font-extrabold uppercase tracking-wider mb-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
+            {/* Mission Card */}
+            <div className="bg-gradient-to-br from-blue-50/80 via-white to-sky-50/30 border border-blue-200/90 rounded-3xl p-6 sm:p-9 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-6 relative overflow-hidden card-animate-hover">
+              <div className="absolute top-0 right-0 w-44 h-44 bg-blue-400/10 rounded-full blur-2xl pointer-events-none" />
+
+              <div className="space-y-4 relative z-10">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-2xl bg-blue-100/80 text-[#1D58D8] border border-blue-200 flex items-center justify-center shadow-2xs shrink-0">
+                    <Target className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#1D58D8] block">
+                      Our Core Purpose
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-[#0F172A]">Our Mission</h3>
+                  </div>
+                </div>
+
+                <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-medium">
+                  "To bridge the gap between educational institutions and industry by connecting them with experienced professionals, fostering practical learning, and developing industry-ready talent."
+                </p>
+
+                <div className="pt-2 border-t border-blue-100 space-y-2.5">
+                  <div className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600">
+                    <Check className="w-4 h-4 text-[#1D58D8] shrink-0 mt-0.5" />
+                    <span>Connect institutions with vetted practitioner talent</span>
+                  </div>
+                  <div className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600">
+                    <Check className="w-4 h-4 text-[#1D58D8] shrink-0 mt-0.5" />
+                    <span>Foster hands-on, applied classroom learning</span>
+                  </div>
+                  <div className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600">
+                    <Check className="w-4 h-4 text-[#1D58D8] shrink-0 mt-0.5" />
+                    <span>Develop industry-ready, competitive graduates</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Vision Card */}
+            <div className="bg-gradient-to-br from-emerald-50/80 via-white to-teal-50/30 border border-emerald-200/90 rounded-3xl p-6 sm:p-9 shadow-xs hover:shadow-md transition-all flex flex-col justify-between space-y-6 relative overflow-hidden card-animate-hover">
+              <div className="absolute top-0 right-0 w-44 h-44 bg-emerald-400/10 rounded-full blur-2xl pointer-events-none" />
+
+              <div className="space-y-4 relative z-10">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-2xl bg-emerald-100/80 text-[#059669] border border-emerald-200 flex items-center justify-center shadow-2xs shrink-0">
+                    <Compass className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-[#059669] block">
+                      Our Long-Term Aspiration
+                    </span>
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-[#0F172A]">Our Vision</h3>
+                  </div>
+                </div>
+
+                <p className="text-sm sm:text-base text-slate-700 leading-relaxed font-medium">
+                  "To become a leading platform connecting industry and academia through real-world expertise and meaningful collaboration."
+                </p>
+
+                <div className="pt-2 border-t border-emerald-100 space-y-2.5">
+                  <div className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600">
+                    <Check className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
+                    <span>Build India's premier academic-industry network</span>
+                  </div>
+                  <div className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600">
+                    <Check className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
+                    <span>Make real-world expertise accessible to every campus</span>
+                  </div>
+                  <div className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-600">
+                    <Check className="w-4 h-4 text-[#059669] shrink-0 mt-0.5" />
+                    <span>Champion continuous, collaborative knowledge exchange</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* ========================================================================= */}
+      {/* 4. COLLABORATION FORMATS */}
+      {/* ========================================================================= */}
+      <ScrollReveal>
+        <section className="space-y-8">
+          <div className="text-center space-y-2 max-w-2xl mx-auto">
+            <div className="text-[11px] font-bold uppercase tracking-widest text-[#00A86B]">
+              HOW WE COLLABORATE
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] tracking-tight">
+              Engagement Formats Tailored to Academic Needs
+            </h2>
+            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
+              Structured collaboration formats designed to seamlessly fit institutional requirements and expert availability.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {collaborationFormats.map((format, idx) => {
+              const Icon = format.icon;
+              return (
+                <div
+                  key={idx}
+                  className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4 card-animate-hover h-full"
+                >
+                  <div className="space-y-3">
+                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center border shrink-0 ${format.color}`}>
+                      <Icon className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-base font-bold text-[#0F172A]">{format.title}</h3>
+                    <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                      {format.desc}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      </ScrollReveal>
+
+      {/* ========================================================================= */}
+      {/* 5. VALUES SECTION — "What We Stand For" (COMMENTED OUT) */}
+      {/* ========================================================================= */}
+      {/* 
+      <ScrollReveal>
+        <section className="bg-gradient-to-br from-blue-50/60 via-sky-50/30 to-indigo-50/20 border border-blue-100/70 rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xs relative overflow-hidden">
+          <div className="mb-8 relative z-10">
+            <div className="inline-flex items-center px-3.5 py-1 rounded-full bg-blue-100/80 border border-blue-200 text-[#1D58D8] text-[11px] font-extrabold uppercase tracking-wider mb-2.5">
               OUR VALUES
             </div>
             <h2 className="text-2xl sm:text-3xl lg:text-[34px] font-extrabold text-[#0F172A] tracking-tight leading-tight">
               What We <span className="text-[#1D58D8]">Stand For</span>
             </h2>
-            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mt-2 max-w-xl">
-              Our core values drive everything we do at Real World Integration.
+            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mt-1 max-w-xl">
+              The fundamental principles that guide how we build relationships between academia and industry.
             </p>
           </div>
 
-          {/* 4 horizontal value cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 relative z-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 relative z-10">
             {values.map((val) => {
               const Icon = val.icon;
               return (
                 <div
                   key={val.id}
-                  className="flex items-start gap-3.5 p-4 sm:p-5 rounded-2xl bg-white/80 border border-white/90 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 group"
+                  className="bg-white border border-slate-200/90 rounded-2xl p-5 shadow-2xs hover:shadow-md hover:border-slate-300 transition-all duration-300 flex flex-col justify-between space-y-3"
                 >
-                  {/* Circle Icon */}
-                  <div className={`w-11 h-11 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110 ${val.iconBg}`}>
+                  <div className={`w-11 h-11 rounded-2xl flex items-center justify-center border shrink-0 ${val.colorClass}`}>
                     <Icon className="w-5 h-5" />
                   </div>
-                  {/* Text */}
-                  <div className="min-w-0">
+                  <div>
                     <h3 className="text-sm font-bold text-slate-900 leading-snug mb-1">
                       {val.title}
                     </h3>
-                    <p className="text-[11.5px] sm:text-xs text-slate-500 leading-relaxed">
+                    <p className="text-xs text-slate-500 leading-relaxed">
                       {val.description}
                     </p>
                   </div>
@@ -396,16 +536,17 @@ export const About = () => {
               );
             })}
           </div>
-        </div>
-      </section>
+        </section>
       </ScrollReveal>
+      */}
 
       {/* ========================================================================= */}
-      {/* 4. STATISTICS SECTION — Light background row matching screenshot */}
+      {/* 6. STATISTICS SECTION (COMMENTED OUT) */}
       {/* ========================================================================= */}
+      {/* 
       <section ref={statsRef} className="relative">
         <div className="bg-white border border-slate-200/80 rounded-3xl shadow-sm overflow-hidden">
-          <div className="grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 divide-x-0 lg:divide-x divide-slate-200/70">
+          <div className="grid grid-cols-2 lg:grid-cols-4 divide-y sm:divide-y-0 divide-x-0 sm:divide-x divide-slate-100">
             {statsData.map((stat, idx) => {
               const Icon = stat.icon;
               const displayCount = counts[idx] || 0;
@@ -418,11 +559,9 @@ export const About = () => {
                   key={stat.id}
                   className="flex items-center gap-4 sm:gap-5 px-6 sm:px-8 py-7 sm:py-8 group hover:bg-blue-50/40 transition-colors duration-200"
                 >
-                  {/* Colored circle icon */}
-                  <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110 ${stat.bg} ${stat.color}`}>
+                  <div className={`w-11 h-11 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-110 ${stat.bg} ${stat.color}`}>
                     <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                   </div>
-                  {/* Number + Label */}
                   <div>
                     <div className="text-2xl sm:text-3xl font-black text-[#0F172A] tracking-tight leading-none">
                       {formattedValue}{stat.suffix}
@@ -437,40 +576,46 @@ export const About = () => {
           </div>
         </div>
       </section>
+      */}
 
       {/* ========================================================================= */}
-      {/* 5. CALL TO ACTION BANNER */}
+      {/* 7. CALL TO ACTION BANNER */}
       {/* ========================================================================= */}
       <ScrollReveal direction="scale">
-      <section className="relative pb-6">
-        <div className="bg-[#0b172b] border border-slate-800 rounded-3xl p-7 sm:p-10 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative">
-          {/* Subtle accent wave line / glow */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-          
-          <div className="flex items-center gap-4 sm:gap-5 relative z-10 text-left max-w-xl">
-            <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 shrink-0">
-              <Handshake className="w-6 h-6 sm:w-7 sm:h-7" />
-            </div>
-            <div>
-              <h3 className="text-lg sm:text-xl lg:text-2xl font-extrabold text-white tracking-tight">
-                Let's Build a Stronger Future Together
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-400 font-medium leading-relaxed mt-1">
-                Partner with us to create real learning opportunities and industry-ready talent.
-              </p>
-            </div>
-          </div>
+        <section className="relative pb-4">
+          <div className="bg-[#0b172b] border border-slate-800 rounded-3xl p-7 sm:p-10 lg:p-12 shadow-xl flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden relative">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
-          <div className="flex items-center gap-3 relative z-10 w-full md:w-auto justify-end">
-            <Link
-              to="/contact"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-slate-950 font-bold text-xs sm:text-sm rounded-full shadow-sm hover:bg-slate-100 transition-transform active:scale-[0.98] cursor-pointer"
-            >
-              Get in Touch <ArrowRight className="w-4 h-4" />
-            </Link>
+            <div className="flex items-center gap-4 sm:gap-5 relative z-10 text-left max-w-xl">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-blue-600/20 border border-blue-500/30 flex items-center justify-center text-blue-400 shrink-0">
+                <Handshake className="w-6 h-6 sm:w-7 sm:h-7" />
+              </div>
+              <div>
+                <h3 className="text-lg sm:text-xl lg:text-2xl font-extrabold text-white tracking-tight">
+                  Let's Build a Stronger Future Together
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-400 font-medium leading-relaxed mt-1">
+                  Partner with us to create real learning opportunities and industry-ready talent.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3 relative z-10 w-full md:w-auto justify-start md:justify-end">
+              <Link
+                to="/register/institution"
+                className="btn-arrow-animate inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#1D58D8] hover:bg-[#1546B8] text-white font-bold text-xs sm:text-sm rounded-full shadow-sm transition-all active:scale-[0.98] cursor-pointer"
+              >
+                Join as Institution <ArrowRight className="w-4 h-4 arrow-icon" />
+              </Link>
+              <Link
+                to="/contact"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-slate-950 font-bold text-xs sm:text-sm rounded-full shadow-sm hover:bg-slate-100 transition-all active:scale-[0.98] cursor-pointer"
+              >
+                Get in Touch
+              </Link>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
       </ScrollReveal>
     </div>
   );

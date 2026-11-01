@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import { ScrollReveal } from '../../components/common/ScrollReveal';
@@ -31,24 +31,61 @@ import {
   ArrowDown
 } from 'lucide-react';
 
-const ALIGN_PHRASES = [
-  'Into Education',
-  'Into Classrooms',
-  'Into Campuses',
-  'Into Future Careers'
+const COLLABORATION_WAYS = [
+  {
+    title: 'Guest Lecture',
+    description: 'Bring real-world industry perspectives and practical insights to students.',
+    icon: Presentation,
+    colorClasses: 'bg-blue-50 text-[#1D58D8] border-blue-100',
+    delay: 0
+  },
+  {
+    title: 'Workshop/Skill Training',
+    description: 'Conduct hands-on sessions focused on practical skills, tools and current industry practices.',
+    icon: Sparkles,
+    colorClasses: 'bg-emerald-50 text-[#059669] border-emerald-100',
+    delay: 100
+  },
+  {
+    title: 'Mentorship',
+    description: 'Guide students through projects, careers and real-world industry expectations.',
+    icon: Compass,
+    colorClasses: 'bg-amber-50 text-[#D97706] border-amber-100',
+    delay: 200
+  },
+  {
+    title: 'Students Projects',
+    description: 'Support students with practical projects and real-world problem solving.',
+    icon: FileCode,
+    colorClasses: 'bg-indigo-50 text-[#4F46E5] border-indigo-100',
+    delay: 100
+  },
+  {
+    title: 'Curriculum Co Design',
+    description: 'Help institutions strengthen academic content with current industry perspectives.',
+    icon: BookOpen,
+    colorClasses: 'bg-teal-50 text-[#0D9488] border-teal-100',
+    delay: 200
+  },
+  {
+    title: 'Internship Placement',
+    description: 'Connect students with hands-on industry internship opportunities and workplace experience.',
+    icon: Briefcase,
+    colorClasses: 'bg-purple-50 text-purple-600 border-purple-100',
+    delay: 300
+  },
+  {
+    title: 'Campus Placement',
+    description: 'Bridge graduating talent directly with hiring industry partners and career opportunities.',
+    icon: GraduationCap,
+    colorClasses: 'bg-rose-50 text-[#E11D48] border-rose-100',
+    delay: 300
+  }
 ];
 
 export const Home = () => {
   const { experts } = useApp();
   const featuredExperts = experts?.slice(0, 4) || [];
-  const [phraseIndex, setPhraseIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setPhraseIndex((prev) => (prev + 1) % ALIGN_PHRASES.length);
-    }, 3200);
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <div className="space-y-10 sm:space-y-20 lg:space-y-24 pb-12 sm:pb-20 animate-fade">
@@ -65,14 +102,12 @@ export const Home = () => {
           <div className="lg:col-span-6 space-y-6 text-left animate-slide-up-smooth">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-[#1D58D8] text-[10px] sm:text-[11px] font-bold tracking-wider uppercase shadow-2xs" style={{ animation: 'stagger-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0ms forwards', opacity: 0 }}>
               <Sparkles className="w-3.5 h-3.5 text-[#1D58D8]" />
-              INDUSTRY &times; ACADEMIA
+              ACADEMIA &times; INDUSTRY
             </div>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight leading-[1.12] text-[#0F172A] min-h-[120px] sm:min-h-[135px]" style={{ animation: 'stagger-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) 80ms forwards', opacity: 0 }}>
-              Bringing Industry Expertise <br />
-              <span key={phraseIndex} className="inline-block text-[#1D58D8] animate-align-text">
-                {ALIGN_PHRASES[phraseIndex]}
-              </span>
+            <h1 className="text-4xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight leading-[1.12] text-[#0F172A]" style={{ animation: 'stagger-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) 80ms forwards', opacity: 0 }}>
+              Real World Mastery Meets <br />
+              <span className="text-[#1D58D8]">Institutional Ambition</span>
             </h1>
 
             {/* Thumbnail + Browse text */}
@@ -88,7 +123,7 @@ export const Home = () => {
             </div>
 
             <p className="text-slate-600 text-xs sm:text-sm md:text-base max-w-xl leading-relaxed" style={{ animation: 'stagger-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) 200ms forwards', opacity: 0 }}>
-              Real World Integration connects colleges, universities and training institutes with professionals who can bring real-world knowledge, practical skills and industry experience into the classroom.
+              Connecting institutions with industry experts to enrich student learning through practical knowledge and real-world experience.
             </p>
 
             {/* CTAs */}
@@ -178,13 +213,14 @@ export const Home = () => {
       </section>
 
       {/* ========================================================================= */}
-      {/* 2. CORE VALUE SECTION */}
+      {/* 2. CORE VALUE SECTION (COMMENTED OUT) */}
       {/* ========================================================================= */}
+      {/* 
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-10">
         <ScrollReveal>
         <div className="text-center space-y-2 max-w-3xl mx-auto">
           <div className="text-[11px] font-bold uppercase tracking-widest text-[#1D58D8]">
-            ONE PLATFORM. TWO COMMUNITIES.
+            TWO COMMUNITIES WITH ONE INTEGRATED PLATFORM
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] tracking-tight">
             Connecting Institutions With the Right Industry Expertise
@@ -195,9 +231,7 @@ export const Home = () => {
         </div>
         </ScrollReveal>
 
-        {/* Two Large Value Cards */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8">
-          {/* Card 1: For Institutions */}
           <ScrollReveal delay={0}>
           <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 shadow-2xs hover:border-slate-300 transition-all flex flex-col justify-between space-y-6 sm:space-y-8 card-animate-hover">
             <div className="space-y-6">
@@ -246,7 +280,6 @@ export const Home = () => {
           </div>
           </ScrollReveal>
 
-          {/* Card 2: For Industry Experts */}
           <ScrollReveal delay={150}>
           <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 shadow-2xs hover:border-slate-300 transition-all flex flex-col justify-between space-y-6 sm:space-y-8 card-animate-hover">
             <div className="space-y-6">
@@ -295,7 +328,8 @@ export const Home = () => {
           </div>
           </ScrollReveal>
         </div>
-      </section>
+      </section> 
+      */}
 
       {/* ========================================================================= */}
       {/* 3. HOW IT WORKS */}
@@ -492,109 +526,31 @@ export const Home = () => {
       <section className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 space-y-10">
         <ScrollReveal>
         <div className="text-center space-y-2 max-w-3xl mx-auto">
-          <div className="text-[11px] font-bold uppercase tracking-widest text-[#00A86B]">
-            WAYS TO COLLABORATE
-          </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] tracking-tight">
-            Bring Industry Experience Into the Classroom
+            Ways to Collaborate
           </h2>
-          <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
-            Institutions can engage professionals in different ways depending on their academic and practical needs.
-          </p>
         </div>
         </ScrollReveal>
 
-        {/* 6 Clean Service Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-          {/* Service 1 */}
-          <ScrollReveal delay={0}>
-          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4 card-animate-hover">
-            <div className="space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-blue-50 text-[#1D58D8] flex items-center justify-center border border-blue-100">
-                <Presentation className="w-6 h-6" />
+        {/* 7 Clean Service Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+          {COLLABORATION_WAYS.map((service, index) => (
+            <ScrollReveal key={service.title} delay={service.delay}>
+              <div className={`bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4 card-animate-hover h-full ${
+                index === COLLABORATION_WAYS.length - 1 ? 'sm:col-span-2 lg:col-span-1' : ''
+              }`}>
+                <div className="space-y-3">
+                  <div className={`w-12 h-12 rounded-2xl ${service.colorClasses} flex items-center justify-center border shrink-0`}>
+                    <service.icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-base font-bold text-[#0F172A]">{service.title}</h3>
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
               </div>
-              <h3 className="text-base font-bold text-[#0F172A]">Guest Lectures</h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Bring real-world industry perspectives and practical insights to students.
-              </p>
-            </div>
-          </div>
-          </ScrollReveal>
-
-          {/* Service 2 */}
-          <ScrollReveal delay={100}>
-          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4 card-animate-hover">
-            <div className="space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-[#059669] flex items-center justify-center border border-emerald-100">
-                <Sparkles className="w-6 h-6" />
-              </div>
-              <h3 className="text-base font-bold text-[#0F172A]">Workshops</h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Conduct hands-on sessions focused on practical skills, tools and current industry practices.
-              </p>
-            </div>
-          </div>
-          </ScrollReveal>
-
-          {/* Service 3 */}
-          <ScrollReveal delay={200}>
-          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4 card-animate-hover">
-            <div className="space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-amber-50 text-[#D97706] flex items-center justify-center border border-amber-100">
-                <Compass className="w-6 h-6" />
-              </div>
-              <h3 className="text-base font-bold text-[#0F172A]">Mentorship</h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Guide students through projects, careers and real-world industry expectations.
-              </p>
-            </div>
-          </div>
-          </ScrollReveal>
-
-          {/* Service 4 */}
-          <ScrollReveal delay={100}>
-          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4 card-animate-hover">
-            <div className="space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-[#4F46E5] flex items-center justify-center border border-indigo-100">
-                <FileCode className="w-6 h-6" />
-              </div>
-              <h3 className="text-base font-bold text-[#0F172A]">Student Projects</h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Support students with practical projects and real-world problem solving.
-              </p>
-            </div>
-          </div>
-          </ScrollReveal>
-
-          {/* Service 5 */}
-          <ScrollReveal delay={200}>
-          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4 card-animate-hover">
-            <div className="space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#0D9488] flex items-center justify-center border border-teal-100">
-                <BookOpen className="w-6 h-6" />
-              </div>
-              <h3 className="text-base font-bold text-[#0F172A]">Curriculum Development</h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Help institutions strengthen academic content with current industry perspectives.
-              </p>
-            </div>
-          </div>
-          </ScrollReveal>
-
-          {/* Service 6 */}
-          <ScrollReveal delay={300}>
-          <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 shadow-2xs hover:shadow-sm hover:border-slate-300 transition-all flex flex-col justify-between space-y-4 card-animate-hover">
-            <div className="space-y-3">
-              <div className="w-12 h-12 rounded-2xl bg-rose-50 text-[#E11D48] flex items-center justify-center border border-rose-100">
-                <Briefcase className="w-6 h-6" />
-              </div>
-              <h3 className="text-base font-bold text-[#0F172A]">Consultancy</h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Provide professional expertise for academic, technical and industry-related initiatives.
-              </p>
-            </div>
-          </div>
-          </ScrollReveal>
+            </ScrollReveal>
+          ))}
         </div>
       </section>
 
@@ -626,7 +582,7 @@ export const Home = () => {
               <div className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-emerald-500/80" />
             </div>
             <div className="text-[10px] sm:text-[11px] text-slate-400 font-mono truncate">
-              Explore Industry Experts
+              Find the Expertise You Need
             </div>
             <div className="text-[9px] sm:text-[10px] text-slate-500 font-semibold px-1.5 sm:px-2 py-0.5 rounded bg-slate-800 hidden sm:block">
               Live SaaS Platform
@@ -763,11 +719,17 @@ export const Home = () => {
 
           <div className="text-center pt-5 pb-1">
             <Link
-              to="/experts"
+              to="/register/institution"
               className="inline-flex items-center gap-2 px-7 py-3 bg-[#1D58D8] hover:bg-[#1546B8] text-white rounded-full text-xs sm:text-sm font-bold shadow-sm transition-all"
             >
-              Explore Industry Experts →
+              Find the Expertise You Need →
             </Link>
+            <p className="text-[11px] text-slate-400 mt-2 font-medium">
+              Already registered?{' '}
+              <Link to="/login" className="text-blue-400 hover:underline font-semibold">
+                Log in
+              </Link>
+            </p>
           </div>
         </div>
         </ScrollReveal>
@@ -783,7 +745,7 @@ export const Home = () => {
             WHY IT MATTERS
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#0F172A] tracking-tight">
-            Closer to Industry. Closer to Practice.
+            Knowledge Becomes More Powerful When It Meets Experience
           </h2>
         </div>
         </ScrollReveal>
@@ -888,8 +850,9 @@ export const Home = () => {
       </section>
 
       {/* ========================================================================= */}
-      {/* 7. FEATURED EXPERTS */}
+      {/* 7. FEATURED EXPERTS (COMMENTED OUT) */}
       {/* ========================================================================= */}
+      {/* 
       <section className="w-full space-y-8 overflow-hidden">
         <ScrollReveal>
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 xl:px-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
@@ -913,7 +876,6 @@ export const Home = () => {
         </div>
         </ScrollReveal>
 
-        {/* Auto-scrolling horizontal carousel - Full Screen Width */}
         <style>{`
           @keyframes scrollExperts {
             0% { transform: translateX(0); }
@@ -931,7 +893,6 @@ export const Home = () => {
         `}</style>
         <div className="w-full overflow-hidden py-3">
           <div className="experts-scroll-track">
-            {/* Render cards multiplied into two identical 8-card halves for seamless infinite loop from screen edge to screen edge */}
             {[
               ...featuredExperts,
               ...featuredExperts,
@@ -965,7 +926,6 @@ export const Home = () => {
                     <span>{exp.experience} Years Experience</span>
                   </div>
 
-                  {/* Skills */}
                   <div>
                     <span className="text-[10px] font-bold text-slate-400 block uppercase tracking-wider mb-1.5">
                       Skills:
@@ -982,7 +942,6 @@ export const Home = () => {
                     </div>
                   </div>
 
-                  {/* Services */}
                   <div>
                     <span className="text-[10px] font-bold text-slate-400 block uppercase tracking-wider mb-1.5">
                       Services:
@@ -1013,6 +972,7 @@ export const Home = () => {
           </div>
         </div>
       </section>
+      */}
 
       {/* ========================================================================= */}
       {/* 8. FINAL CTA */}
