@@ -111,7 +111,7 @@ export const Home = () => {
             </h1>
 
             {/* Thumbnail + Browse text */}
-            <div className="flex items-center gap-3 sm:gap-4 py-1">
+            {/* <div className="flex items-center gap-3 sm:gap-4 py-1">
               <img
                 src={heroThumb}
                 alt="Trusted Experts"
@@ -120,7 +120,7 @@ export const Home = () => {
               <p className="text-[11px] sm:text-sm text-slate-600 leading-snug">
                 Simply browse through our extensive list of trusted experts,<br className="hidden sm:inline" /> schedule your academic engagement hassle-free.
               </p>
-            </div>
+            </div> */}
 
             <p className="text-slate-600 text-xs sm:text-sm md:text-base max-w-xl leading-relaxed" style={{ animation: 'stagger-fade-up 0.55s cubic-bezier(0.16, 1, 0.3, 1) 200ms forwards', opacity: 0 }}>
               Connecting institutions with industry experts to enrich student learning through practical knowledge and real-world experience.
